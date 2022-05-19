@@ -3,7 +3,8 @@ import { Button } from '../../components/Button';
 import { EmptyBlock } from '../../components/EmptyBlock/EmptyBlock';
 import { ModalContainer } from '../../components/Modal';
 import { PageHeader } from '../../components/PageHeader';
-import { Todo } from '../../components/Todo';
+
+import { TodoContainer } from '../../components/Todo/TodoContainer';
 import { TodoPageProps } from './interfaces';
 
 import './todoPage.scss';
@@ -30,7 +31,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
           <div className="todo-page__wrapper">
             {todos.slice(-5).map(({ id, title, description }) => {
               return (
-                <Todo
+                <TodoContainer
                   key={id}
                   title={title}
                   descr={description}

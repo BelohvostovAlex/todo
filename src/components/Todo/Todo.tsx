@@ -11,6 +11,10 @@ export const Todo: React.FC<TodoProps> = ({
   descr,
   deleteTodo,
   handleEditVisibleModal,
+  avaliableOptions,
+  selectedOption,
+  handleOption,
+  classes,
 }) => {
   return (
     <div className="todo">
@@ -18,6 +22,19 @@ export const Todo: React.FC<TodoProps> = ({
         <h2 className="todo-text__title">{title}</h2>
         <h3 className="todo-text__descr">{descr}</h3>
       </div>
+      <select
+        name="todo-select"
+        id="todo-select"
+        onChange={handleOption}
+        className={classes}
+        value={selectedOption}
+      >
+        {avaliableOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
       <div className="todo-buttons">
         <RoundButton
           btnText="X"
