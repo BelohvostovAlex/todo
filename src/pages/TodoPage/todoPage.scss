@@ -1,0 +1,13 @@
+.todo-page {
+  width: 100%;
+  height: calc(100% - 10vh);
+
+  &__wrapper {
+    margin-top: 50px;
+  }
+}
+
+.todo-page__button-wrapper {
+  display: flex;
+  justify-content: end;
+}

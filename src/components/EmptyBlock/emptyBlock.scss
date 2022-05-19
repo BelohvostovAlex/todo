@@ -1,0 +1,21 @@
+.empty-block {
+  width: 100%;
+  max-width: 1200px;
+  height: 260px;
+  max-height: 420px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  border: 3px solid rgb(97, 97, 97);
+  background-color: rgb(104, 169, 234);
+
+  &__title {
+    font-size: 20px;
+    color: black;
+    text-align: start;
+  }
+}
+

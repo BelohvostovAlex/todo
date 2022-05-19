@@ -1,0 +1,22 @@
+.button {
+  border: 2px solid black;
+  width: 140px;
+  max-width: 200px;
+  height: 50px;
+  padding: 10px 20px;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+
+  &--green {
+    background-color: rgb(83, 176, 83);
+  }
+
+  &--red {
+    background-color: rgb(200, 45, 45);
+  }
+
+  &--blue {
+    background-color: rgb(48, 48, 188);
+  }
+}
