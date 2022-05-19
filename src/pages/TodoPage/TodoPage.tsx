@@ -13,7 +13,12 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   deleteTodo,
   addTodo,
   visibleModal,
+  visibleEditModal,
   handleVisibleModal,
+  handleEditVisibleModal,
+  onCloseEditVisibleModal,
+  editTodo,
+  currIDForEdit,
 }) => {
   return (
     <div className="todo-page">
@@ -31,6 +36,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
                   descr={description}
                   id={id}
                   deleteTodo={() => deleteTodo(id)}
+                  handleEditVisibleModal={() => handleEditVisibleModal(id)}
                 />
               );
             })}
@@ -43,8 +49,15 @@ export const TodoPage: React.FC<TodoPageProps> = ({
             onClickBtn={handleVisibleModal}
           />
         </div>
-        {visibleModal && (
-          <ModalContainer addTodo={addTodo} onClose={handleVisibleModal} />
+        {(visibleModal || visibleEditModal) && (
+          <ModalContainer
+            onClose={handleVisibleModal}
+            addTodo={addTodo}
+            visibleEditModal={visibleEditModal}
+            onCloseEditModal={onCloseEditVisibleModal}
+            editTodo={editTodo}
+            currIDForEdit={currIDForEdit}
+          />
         )}
       </div>
     </div>

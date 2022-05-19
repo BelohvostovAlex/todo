@@ -7,6 +7,8 @@ export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
 
   const [visibleModal, setVisibleModal] = useState(false);
+  const [visibleEditModal, setVisibleEditModal] = useState(false);
+  const [currIDForEdit, setCurrIDForEdit] = useState('');
 
   const addTodo = (todo: ITodo) => {
     setTodos([...todos, todo]);
@@ -20,6 +22,37 @@ export const TodoPageContainer: React.FC = () => {
     setVisibleModal((prev) => !prev);
   };
 
+  const handleEditVisibleModal = (id: string) => {
+    setVisibleEditModal(true);
+    setCurrIDForEdit(id);
+  };
+
+  const onCloseEditVisibleModal = () => {
+    setVisibleEditModal(false);
+    setCurrIDForEdit('');
+  };
+
+  const editTodo = (id: string, title: string, description: string) => {
+    const currTodo = todos.find((todo) => todo.id === id);
+    const editedTodo = {
+      ...currTodo,
+      title,
+      description,
+    };
+    setTodos(
+      todos.map((todo) => {
+        return todo.id === id
+          ? {
+              ...todo,
+              title: editedTodo.title,
+              description: editedTodo.description,
+            }
+          : todo;
+      })
+    );
+    onCloseEditVisibleModal();
+  };
+
   return (
     <TodoPage
       todos={todos}
@@ -27,6 +60,11 @@ export const TodoPageContainer: React.FC = () => {
       deleteTodo={deleteTodo}
       visibleModal={visibleModal}
       handleVisibleModal={handleVisibleModal}
+      visibleEditModal={visibleEditModal}
+      handleEditVisibleModal={handleEditVisibleModal}
+      currIDForEdit={currIDForEdit}
+      editTodo={editTodo}
+      onCloseEditVisibleModal={onCloseEditVisibleModal}
     />
   );
 };

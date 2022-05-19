@@ -8,6 +8,10 @@ import { Modal } from './Modal';
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
   addTodo,
+  visibleEditModal,
+  onCloseEditModal,
+  editTodo,
+  currIDForEdit,
 }) => {
   const [title, handleTitle] = useInput();
   const [description, handleDescription] = useInput();
@@ -23,6 +27,10 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       handleDescription={handleDescription}
       onClose={onClose}
       createTodo={createTodo}
+      visibleEditModal={visibleEditModal}
+      onCloseEditModal={onCloseEditModal}
+      editTodo={editTodo}
+      currIDForEdit={currIDForEdit}
     />
   );
 };

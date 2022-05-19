@@ -12,9 +12,17 @@ export interface ModalProps {
   ) => void;
   onClose: () => void;
   createTodo: (title: string, description: string) => void;
+  visibleEditModal: boolean;
+  onCloseEditModal: () => void;
+  editTodo: (id: string, title: string, description: string) => void;
+  currIDForEdit: string;
 }
 
 export interface ModalContainerProps {
   onClose: () => void;
   addTodo: (todo: ITodo) => void;
+  visibleEditModal: boolean;
+  onCloseEditModal: () => void;
+  editTodo: (id: string, title: string, description: string) => void;
+  currIDForEdit: string;
 }

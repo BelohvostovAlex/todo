@@ -11,7 +11,11 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   handleDescription,
   onClose,
+  onCloseEditModal,
   createTodo,
+  visibleEditModal,
+  editTodo,
+  currIDForEdit,
 }) => {
   return (
     <div className="modal">
@@ -19,7 +23,7 @@ export const Modal: React.FC<ModalProps> = ({
         <RoundButton
           btnText="X"
           btnClass="round-btn round-btn--gray round-btn--toRight"
-          onClickBtn={onClose}
+          onClickBtn={visibleEditModal ? onCloseEditModal : onClose}
         />
         <label htmlFor="modal-form__text">Title</label>
         <input
@@ -39,16 +43,33 @@ export const Modal: React.FC<ModalProps> = ({
           onChange={handleDescription}
         ></textarea>
         <div className="modal-form__buttons">
-          <Button
-            btnText="Create"
-            btnClass="button button--blue"
-            onClickBtn={() => createTodo(title, description)}
-          />
-          <Button
-            btnText="Cancel"
-            btnClass="button button--red"
-            onClickBtn={onClose}
-          />
+          {visibleEditModal ? (
+            <>
+              <Button
+                btnText="Edit"
+                btnClass="button button--blue"
+                onClickBtn={() => editTodo(currIDForEdit, title, description)}
+              />
+              <Button
+                btnText="Cancel"
+                btnClass="button button--red"
+                onClickBtn={onCloseEditModal}
+              />
+            </>
+          ) : (
+            <>
+              <Button
+                btnText="Create"
+                btnClass="button button--blue"
+                onClickBtn={() => createTodo(title, description)}
+              />
+              <Button
+                btnText="Cancel"
+                btnClass="button button--red"
+                onClickBtn={onClose}
+              />
+            </>
+          )}
         </div>
       </form>
     </div>
