@@ -11,18 +11,18 @@ export interface ModalProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onClose: () => void;
-  visibleEditModal: boolean;
-  onCloseEditModal: () => void;
+  onCloseModalWithEditFeature: () => void;
   editTodo: (id: string, title: string, description: string) => void;
   currIDForEdit: string;
   createTodo: () => void;
+  type: string;
 }
 
 export interface ModalContainerProps {
   onClose: () => void;
   addTodo: (todo: ITodo) => void;
-  visibleEditModal: boolean;
-  onCloseEditModal: () => void;
+  onCloseModalWithEditFeature: () => void;
   editTodo: (id: string, title: string, description: string) => void;
   currIDForEdit: string;
+  modalType: string;
 }

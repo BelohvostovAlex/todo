@@ -10,7 +10,7 @@ export const Todo: React.FC<TodoProps> = ({
   title,
   description,
   deleteTodo,
-  handleEditVisibleModal,
+  handleVisibleModalWithEditFeature,
 }) => {
   return (
     <div className="todo">
@@ -27,7 +27,7 @@ export const Todo: React.FC<TodoProps> = ({
         <RoundButton
           text="E"
           className="round-btn round-btn--yellow"
-          onClick={() => handleEditVisibleModal(id)}
+          onClick={() => handleVisibleModalWithEditFeature(id)}
         />
       </div>
     </div>

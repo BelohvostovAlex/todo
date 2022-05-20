@@ -11,11 +11,11 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   handleDescription,
   onClose,
-  onCloseEditModal,
+  onCloseModalWithEditFeature,
   createTodo,
-  visibleEditModal,
   editTodo,
   currIDForEdit,
+  type,
 }) => {
   return (
     <div className="modal">
@@ -23,7 +23,7 @@ export const Modal: React.FC<ModalProps> = ({
         <RoundButton
           text="X"
           className="round-btn round-btn--gray round-btn--toRight"
-          onClick={visibleEditModal ? onCloseEditModal : onClose}
+          onClick={type === 'edit' ? onCloseModalWithEditFeature : onClose}
         />
         <label htmlFor="modal-form-text">Title</label>
         <input
@@ -45,7 +45,7 @@ export const Modal: React.FC<ModalProps> = ({
           onChange={handleDescription}
         ></textarea>
         <div className="modal-form__buttons">
-          {visibleEditModal ? (
+          {type === 'edit' ? (
             <>
               <Button
                 text="Edit"
@@ -55,7 +55,7 @@ export const Modal: React.FC<ModalProps> = ({
               <Button
                 text="Cancel"
                 className="button button--red"
-                onClick={onCloseEditModal}
+                onClick={onCloseModalWithEditFeature}
               />
             </>
           ) : (

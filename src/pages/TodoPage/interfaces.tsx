@@ -5,11 +5,12 @@ export interface TodoPageProps {
   addTodo: (todo: ITodo) => void;
   deleteTodo: (id: string) => void;
   visibleModal: boolean;
-  visibleEditModal: boolean;
+  visibleModalWithEditFeature: boolean;
   handleVisibleModal: () => void;
-  handleEditVisibleModal: (id: string) => void;
-  onCloseEditVisibleModal: () => void;
+  handleVisibleModalWithEditFeature: (id: string) => void;
+  onCloseModalWithEditFeature: () => void;
   editTodo: (id: string, title: string, description: string) => void;
   currIDForEdit: string;
   hasTodo: boolean;
+  modalType: string;
 }

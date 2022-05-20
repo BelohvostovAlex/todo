@@ -3,5 +3,5 @@ export interface TodoProps {
   title: string;
   description: string;
   deleteTodo: (id: string) => void;
-  handleEditVisibleModal: (id: string) => void;
+  handleVisibleModalWithEditFeature: (id: string) => void;
 }

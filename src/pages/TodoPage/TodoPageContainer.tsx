@@ -5,8 +5,10 @@ import { ITodo } from '../../models/ITodo';
 
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
+  const [modalType, setModalType] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
-  const [visibleEditModal, setVisibleEditModal] = useState(false);
+  const [visibleModalWithEditFeature, setVisibleEditModalWithEditFeature] =
+    useState(false);
   const [currIDForEdit, setCurrIDForEdit] = useState('');
 
   const hasTodo = todos.length ? true : false;
@@ -21,15 +23,17 @@ export const TodoPageContainer: React.FC = () => {
 
   const handleVisibleModal = () => {
     setVisibleModal((prev) => !prev);
+    setModalType('create');
   };
 
-  const handleEditVisibleModal = (id: string) => {
-    setVisibleEditModal(true);
+  const handleVisibleModalWithEditFeature = (id: string) => {
+    setVisibleEditModalWithEditFeature(true);
     setCurrIDForEdit(id);
+    setModalType('edit');
   };
 
-  const onCloseEditVisibleModal = () => {
-    setVisibleEditModal(false);
+  const onCloseModalWithEditFeature = () => {
+    setVisibleEditModalWithEditFeature(false);
     setCurrIDForEdit('');
   };
 
@@ -51,7 +55,7 @@ export const TodoPageContainer: React.FC = () => {
           : todo;
       })
     );
-    onCloseEditVisibleModal();
+    onCloseModalWithEditFeature();
   };
 
   return (
@@ -61,12 +65,13 @@ export const TodoPageContainer: React.FC = () => {
       deleteTodo={deleteTodo}
       visibleModal={visibleModal}
       handleVisibleModal={handleVisibleModal}
-      visibleEditModal={visibleEditModal}
-      handleEditVisibleModal={handleEditVisibleModal}
+      visibleModalWithEditFeature={visibleModalWithEditFeature}
+      handleVisibleModalWithEditFeature={handleVisibleModalWithEditFeature}
       currIDForEdit={currIDForEdit}
       editTodo={editTodo}
-      onCloseEditVisibleModal={onCloseEditVisibleModal}
+      onCloseModalWithEditFeature={onCloseModalWithEditFeature}
       hasTodo={hasTodo}
+      modalType={modalType}
     />
   );
 };
