@@ -8,15 +8,13 @@ import { Modal } from './Modal';
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
   addTodo,
-  visibleEditModal,
-  onCloseEditModal,
-  editTodo,
-  currIDForEdit,
 }) => {
   const [title, handleTitle] = useInput();
   const [description, handleDescription] = useInput();
-  const createTodo = (title: string, description: string) => {
-    addTodo({ id: v4(), title, description });
+
+  const createTodo = () => {
+    addTodo({ id: v4(), title: title, description: description });
+
     onClose();
   };
   return (
@@ -27,10 +25,6 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       handleDescription={handleDescription}
       onClose={onClose}
       createTodo={createTodo}
-      visibleEditModal={visibleEditModal}
-      onCloseEditModal={onCloseEditModal}
-      editTodo={editTodo}
-      currIDForEdit={currIDForEdit}
     />
   );
 };

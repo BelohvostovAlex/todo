@@ -7,9 +7,8 @@ import { TodoContainerProps } from './interfaces';
 export const TodoContainer: React.FC<TodoContainerProps> = ({
   id,
   title,
-  descr,
+  description,
   deleteTodo,
-  handleEditVisibleModal,
 }) => {
   const [avaliableOptions, setAvaliableOptions] = useState([
     'Todo',
@@ -29,9 +28,8 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
     <Todo
       id={id}
       title={title}
-      descr={descr}
+      description={description}
       deleteTodo={deleteTodo}
-      handleEditVisibleModal={handleEditVisibleModal}
       avaliableOptions={avaliableOptions}
       selectedOption={selectedOption}
       handleOption={handleOption}

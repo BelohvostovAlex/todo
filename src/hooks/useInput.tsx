@@ -14,5 +14,5 @@ export const useInput = (
     setValue(e.target.value);
   };
 
-  return [value.length > 0 ? value : 'write someting, please', handleValue];
+  return [value, handleValue];
 };
