@@ -11,11 +11,11 @@ export interface ModalProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onClose: () => void;
-  createTodo: (title: string, description: string) => void;
   visibleEditModal: boolean;
   onCloseEditModal: () => void;
   editTodo: (id: string, title: string, description: string) => void;
   currIDForEdit: string;
+  createTodo: () => void;
 }
 
 export interface ModalContainerProps {

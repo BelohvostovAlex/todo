@@ -8,7 +8,7 @@ import './todo.scss';
 export const Todo: React.FC<TodoProps> = ({
   id,
   title,
-  descr,
+  description,
   deleteTodo,
   handleEditVisibleModal,
 }) => {
@@ -16,18 +16,18 @@ export const Todo: React.FC<TodoProps> = ({
     <div className="todo">
       <div className="todo-text">
         <h2 className="todo-text__title">{title}</h2>
-        <h3 className="todo-text__descr">{descr}</h3>
+        <h3 className="todo-text__descr">{description}</h3>
       </div>
       <div className="todo-buttons">
         <RoundButton
-          btnText="X"
-          btnClass="round-btn round-btn--red"
-          onClickBtn={() => deleteTodo(id)}
+          text="X"
+          className="round-btn round-btn--red"
+          onClick={() => deleteTodo(id)}
         />
         <RoundButton
-          btnText="E"
-          btnClass="round-btn round-btn--yellow"
-          onClickBtn={() => handleEditVisibleModal(id)}
+          text="E"
+          className="round-btn round-btn--yellow"
+          onClick={() => handleEditVisibleModal(id)}
         />
       </div>
     </div>

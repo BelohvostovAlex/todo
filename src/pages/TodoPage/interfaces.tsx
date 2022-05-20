@@ -11,4 +11,5 @@ export interface TodoPageProps {
   onCloseEditVisibleModal: () => void;
   editTodo: (id: string, title: string, description: string) => void;
   currIDForEdit: string;
+  hasTodo: boolean;
 }

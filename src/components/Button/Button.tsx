@@ -3,14 +3,10 @@ import React from 'react';
 import './buttons.scss';
 import { ButtonProps } from './interfaces';
 
-export const Button: React.FC<ButtonProps> = ({
-  btnText,
-  btnClass,
-  onClickBtn,
-}) => {
+export const Button: React.FC<ButtonProps> = ({ text, className, onClick }) => {
   return (
-    <button className={btnClass} type="button" onClick={onClickBtn}>
-      {btnText}
+    <button className={className} type="button" onClick={onClick}>
+      {text}
     </button>
   );
 };

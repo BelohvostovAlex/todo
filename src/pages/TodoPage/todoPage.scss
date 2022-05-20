@@ -3,11 +3,14 @@
   height: calc(100% - 10vh);
 
   &__wrapper {
-    margin-top: 50px;
+    width: 800px;
+    margin: 50px auto;
   }
 }
 
 .todo-page__button-wrapper {
+  width: 800px;
+  margin: 0 auto;
   display: flex;
   justify-content: end;
 }

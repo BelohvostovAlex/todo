@@ -21,24 +21,26 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="modal">
       <form className="modal-form">
         <RoundButton
-          btnText="X"
-          btnClass="round-btn round-btn--gray round-btn--toRight"
-          onClickBtn={visibleEditModal ? onCloseEditModal : onClose}
+          text="X"
+          className="round-btn round-btn--gray round-btn--toRight"
+          onClick={visibleEditModal ? onCloseEditModal : onClose}
         />
-        <label htmlFor="modal-form__text">Title</label>
+        <label htmlFor="modal-form-text">Title</label>
         <input
           type="text"
-          name="modal-from__text"
-          id="modal-form__text"
+          name="modal-form-text"
+          id="modal-form-text"
+          placeholder="type some text.."
           value={title}
           onChange={handleTitle}
         />
-        <label htmlFor="modal-form__descr">Description</label>
+        <label htmlFor="modal-form-descr">Description</label>
         <textarea
-          name="modal-form__descr"
-          id="modal-form__descr"
+          name="modal-form-descr"
+          id="modal-form-descr"
           cols={30}
           rows={10}
+          placeholder="type some description.."
           value={description}
           onChange={handleDescription}
         ></textarea>
@@ -46,27 +48,27 @@ export const Modal: React.FC<ModalProps> = ({
           {visibleEditModal ? (
             <>
               <Button
-                btnText="Edit"
-                btnClass="button button--blue"
-                onClickBtn={() => editTodo(currIDForEdit, title, description)}
+                text="Edit"
+                className="button button--blue"
+                onClick={() => editTodo(currIDForEdit, title, description)}
               />
               <Button
-                btnText="Cancel"
-                btnClass="button button--red"
-                onClickBtn={onCloseEditModal}
+                text="Cancel"
+                className="button button--red"
+                onClick={onCloseEditModal}
               />
             </>
           ) : (
             <>
               <Button
-                btnText="Create"
-                btnClass="button button--blue"
-                onClickBtn={() => createTodo(title, description)}
+                text="Create"
+                className="button button--blue"
+                onClick={createTodo}
               />
               <Button
-                btnText="Cancel"
-                btnClass="button button--red"
-                onClickBtn={onClose}
+                text="Cancel"
+                className="button button--red"
+                onClick={onClose}
               />
             </>
           )}

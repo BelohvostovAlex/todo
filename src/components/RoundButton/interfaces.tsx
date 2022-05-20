@@ -1,5 +1,5 @@
 export interface RoundButtonProps {
-  btnText: string;
-  btnClass: string;
-  onClickBtn?: () => void;
+  text: string;
+  className: string;
+  onClick?: () => void;
 }

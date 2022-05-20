@@ -4,13 +4,13 @@ import { RoundButtonProps } from './interfaces';
 import './roundButton.scss';
 
 export const RoundButton: React.FC<RoundButtonProps> = ({
-  btnText,
-  btnClass,
-  onClickBtn,
+  text,
+  className,
+  onClick,
 }) => {
   return (
-    <button className={btnClass} onClick={onClickBtn}>
-      {btnText}
+    <button className={className} onClick={onClick}>
+      {text}
     </button>
   );
 };
