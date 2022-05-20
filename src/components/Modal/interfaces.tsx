@@ -11,7 +11,7 @@ export interface ModalProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onClose: () => void;
-  createTodo: (title: string, description: string) => void;
+  createTodo: () => void;
 }
 
 export interface ModalContainerProps {

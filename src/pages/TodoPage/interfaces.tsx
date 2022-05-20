@@ -6,4 +6,5 @@ export interface TodoPageProps {
   deleteTodo: (id: string) => void;
   visibleModal: boolean;
   handleVisibleModal: () => void;
+  hasTodo: boolean;
 }

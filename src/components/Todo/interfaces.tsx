@@ -1,6 +1,6 @@
 export interface TodoProps {
   id: string;
   title: string;
-  descr: string;
+  description: string;
   deleteTodo: (id: string) => void;
 }

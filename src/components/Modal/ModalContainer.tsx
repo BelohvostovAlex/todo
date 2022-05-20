@@ -11,8 +11,10 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
 }) => {
   const [title, handleTitle] = useInput();
   const [description, handleDescription] = useInput();
-  const createTodo = (title: string, description: string) => {
-    addTodo({ id: v4(), title, description });
+
+  const createTodo = () => {
+    addTodo({ id: v4(), title: title, description: description });
+
     onClose();
   };
   return (

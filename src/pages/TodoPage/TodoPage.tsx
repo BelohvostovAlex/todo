@@ -14,21 +14,22 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   addTodo,
   visibleModal,
   handleVisibleModal,
+  hasTodo,
 }) => {
   return (
     <div className="todo-page">
       <PageHeader title="Todo list" />
       <div className="container">
-        {!todos.length ? (
+        {!hasTodo ? (
           <EmptyBlock text="There are nothing here... Please create one" />
         ) : (
           <div className="todo-page__wrapper">
-            {todos.slice(-5).map(({ id, title, description }) => {
+            {todos.map(({ id, title, description }) => {
               return (
                 <Todo
                   key={id}
                   title={title}
-                  descr={description}
+                  description={description}
                   id={id}
                   deleteTodo={() => deleteTodo(id)}
                 />
@@ -38,9 +39,9 @@ export const TodoPage: React.FC<TodoPageProps> = ({
         )}
         <div className="todo-page__button-wrapper">
           <Button
-            btnText="Create new"
-            btnClass="button button--green"
-            onClickBtn={handleVisibleModal}
+            text="Create new"
+            className="button button--green"
+            onClick={handleVisibleModal}
           />
         </div>
         {visibleModal && (

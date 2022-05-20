@@ -5,18 +5,23 @@ import { RoundButton } from '../RoundButton/RoundButton';
 
 import './todo.scss';
 
-export const Todo: React.FC<TodoProps> = ({ id, title, descr, deleteTodo }) => {
+export const Todo: React.FC<TodoProps> = ({
+  id,
+  title,
+  description,
+  deleteTodo,
+}) => {
   return (
     <div className="todo">
       <div className="todo-text">
         <h2 className="todo-text__title">{title}</h2>
-        <h3 className="todo-text__descr">{descr}</h3>
+        <h3 className="todo-text__descr">{description}</h3>
       </div>
       <div className="todo-buttons">
         <RoundButton
-          btnText="X"
-          btnClass="round-btn round-btn--red"
-          onClickBtn={() => deleteTodo(id)}
+          text="X"
+          className="round-btn round-btn--red"
+          onClick={() => deleteTodo(id)}
         />
       </div>
     </div>
