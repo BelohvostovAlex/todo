@@ -8,12 +8,18 @@ import { Modal } from './Modal';
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
   addTodo,
+  avaliableOptions,
 }) => {
   const [title, handleTitle] = useInput();
   const [description, handleDescription] = useInput();
 
   const createTodo = () => {
-    addTodo({ id: v4(), title: title, description: description });
+    addTodo({
+      id: v4(),
+      title: title,
+      description: description,
+      progress: avaliableOptions[0],
+    });
 
     onClose();
   };

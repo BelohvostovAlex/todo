@@ -9,16 +9,19 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   title,
   description,
   deleteTodo,
+  avaliableOptions,
+  handleTodoProgress,
+  todos,
 }) => {
-  const [avaliableOptions, setAvaliableOptions] = useState([
-    'Todo',
-    'In progress',
-    'Done',
-  ]);
-  const [selectedOption, setSelectedOption] = useState('');
+  const currentTodo = todos.find((todo) => todo.id === id);
+  const [selectedOption, setSelectedOption] = useState(currentTodo!.progress);
+
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
+
+    handleTodoProgress(id, e.target.value);
   };
+
   const classes = classNames('todo-select', {
     'todo-select--blue': selectedOption === 'Todo',
     'todo-select--green': selectedOption === 'In progress',

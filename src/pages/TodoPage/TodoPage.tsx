@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../../components/Button';
 import { EmptyBlock } from '../../components/EmptyBlock/EmptyBlock';
+import { FilterListContainer } from '../../components/FilterList';
 import { ModalContainer } from '../../components/Modal';
 import { PageHeader } from '../../components/PageHeader';
 
@@ -16,23 +17,35 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   visibleModal,
   handleVisibleModal,
   hasTodo,
+  filterTodos,
+  avaliableOptions,
+  handleTodoProgress,
+  currentFilter,
 }) => {
   return (
     <div className="todo-page">
       <PageHeader title="Todo list" />
       <div className="container">
+        <FilterListContainer
+          filterTodos={filterTodos}
+          currentFilter={currentFilter}
+        />
         {!hasTodo ? (
-          <EmptyBlock text="There are nothing here... Please create one" />
+          <EmptyBlock text={`There is nothing in '${currentFilter}' now...`} />
         ) : (
           <div className="todo-page__wrapper">
-            {todos.map(({ id, title, description }) => {
+            {todos.map(({ id, title, description, progress }) => {
               return (
                 <TodoContainer
                   key={id}
                   title={title}
                   description={description}
                   id={id}
+                  progress={progress}
+                  todos={todos}
                   deleteTodo={() => deleteTodo(id)}
+                  avaliableOptions={avaliableOptions}
+                  handleTodoProgress={handleTodoProgress}
                 />
               );
             })}
@@ -46,7 +59,11 @@ export const TodoPage: React.FC<TodoPageProps> = ({
           />
         </div>
         {visibleModal && (
-          <ModalContainer onClose={handleVisibleModal} addTodo={addTodo} />
+          <ModalContainer
+            onClose={handleVisibleModal}
+            addTodo={addTodo}
+            avaliableOptions={avaliableOptions}
+          />
         )}
       </div>
     </div>

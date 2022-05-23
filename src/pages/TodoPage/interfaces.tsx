@@ -7,4 +7,8 @@ export interface TodoPageProps {
   visibleModal: boolean;
   handleVisibleModal: () => void;
   hasTodo: boolean;
+  filterTodos: (title: string) => void;
+  avaliableOptions: string[];
+  handleTodoProgress: (id: string, progress: string) => void;
+  currentFilter: string;
 }

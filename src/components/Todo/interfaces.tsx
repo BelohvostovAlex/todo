@@ -1,4 +1,5 @@
 import React from 'react';
+import { ITodo } from '../../models/ITodo';
 
 export interface TodoProps {
   id: string;
@@ -15,5 +16,9 @@ export interface TodoContainerProps {
   id: string;
   title: string;
   description: string;
+  progress: string;
   deleteTodo: (id: string) => void;
+  avaliableOptions: string[];
+  handleTodoProgress: (id: string, progress: string) => void;
+  todos: ITodo[];
 }
