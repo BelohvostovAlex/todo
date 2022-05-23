@@ -4,7 +4,7 @@
   left: 0%;
   width: 100%;
   height: 100%;
-  background-color: rgba($color: #000000, $alpha: 0.3);
+  background-color: rgba($color: #000000, $alpha: 0.2);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -13,17 +13,24 @@
 }
 
 .modal-form {
-  width: 600px;
-  height: 600px;
-  background-color: rgb(183, 195, 207);
+  width: 520px;
+  height: 480px;
+  background-color: rgb(181, 183, 186);
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
-  border: 1px solid black;
+  padding: 30px 50px;
+  border: 2px solid black;
+  position: relative;
+
+  &__label {
+    padding-bottom: 5px;
+    padding-top: 20px;
+    font-size: 18px;
+  }
 }
 
 .modal-form__buttons {
-  padding: 20px 0px;
+  padding-top: 40px;
   display: flex;
   justify-content: space-between;
 }
@@ -31,8 +38,9 @@
 #modal-form-text {
   font-size: 16px;
   font-family: inherit;
-  height: 30px;
+  height: 40px;
   padding: 5px;
+  border: 2px solid black;
 }
 
 #modal-form-descr {
@@ -40,4 +48,5 @@
   font-size: 16px;
   font-family: inherit;
   resize: none;
+  border: 2px solid black;
 }
