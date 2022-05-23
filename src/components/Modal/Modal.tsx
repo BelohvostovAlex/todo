@@ -21,7 +21,9 @@ export const Modal: React.FC<ModalProps> = ({
           className="round-btn round-btn--gray round-btn--toRight"
           onClick={onClose}
         />
-        <label htmlFor="modal-form-text">Title</label>
+        <label className="modal-form__label" htmlFor="modal-form-text">
+          Title
+        </label>
         <input
           type="text"
           name="modal-form-text"
@@ -30,7 +32,9 @@ export const Modal: React.FC<ModalProps> = ({
           value={title}
           onChange={handleTitle}
         />
-        <label htmlFor="modal-form-descr">Description</label>
+        <label className="modal-form__label" htmlFor="modal-form-descr">
+          Description
+        </label>
         <textarea
           name="modal-form-descr"
           id="modal-form-descr"
