@@ -21,6 +21,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   currIDForEdit,
   hasTodo,
   modalType,
+  initialValueForModalWithEditFeature,
 }) => {
   return (
     <div className="todo-page">
@@ -61,6 +62,9 @@ export const TodoPage: React.FC<TodoPageProps> = ({
             editTodo={editTodo}
             currIDForEdit={currIDForEdit}
             modalType={modalType}
+            initialValueForModalWithEditFeature={
+              initialValueForModalWithEditFeature
+            }
           />
         )}
       </div>

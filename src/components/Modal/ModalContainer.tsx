@@ -12,10 +12,18 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   editTodo,
   currIDForEdit,
   modalType,
+  initialValueForModalWithEditFeature,
 }) => {
-  const [title, handleTitle] = useInput();
-  const [description, handleDescription] = useInput();
+  const { title: initialTitle } = initialValueForModalWithEditFeature;
+  const { description: initialDescription } =
+    initialValueForModalWithEditFeature;
 
+  const [title, handleTitle] = useInput(
+    modalType === 'edit' ? initialTitle : ''
+  );
+  const [description, handleDescription] = useInput(
+    modalType === 'edit' ? initialDescription : ''
+  );
   const createTodo = () => {
     addTodo({ id: v4(), title: title, description: description });
 

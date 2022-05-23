@@ -25,4 +25,8 @@ export interface ModalContainerProps {
   editTodo: (id: string, title: string, description: string) => void;
   currIDForEdit: string;
   modalType: string;
+  initialValueForModalWithEditFeature: {
+    title: string;
+    description: string;
+  };
 }

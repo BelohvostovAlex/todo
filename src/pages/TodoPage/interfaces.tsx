@@ -13,4 +13,8 @@ export interface TodoPageProps {
   currIDForEdit: string;
   hasTodo: boolean;
   modalType: string;
+  initialValueForModalWithEditFeature: {
+    title: string;
+    description: string;
+  };
 }
