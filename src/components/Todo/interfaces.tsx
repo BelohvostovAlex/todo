@@ -4,7 +4,7 @@ export interface TodoProps {
   id: string;
   title: string;
   description: string;
-  deleteTodo: (id: string) => void;
+  deleteTodo: () => void;
   avaliableOptions: string[];
   selectedOption: string;
   handleOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;

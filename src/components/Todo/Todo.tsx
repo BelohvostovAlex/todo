@@ -6,7 +6,6 @@ import { RoundButton } from '../RoundButton/RoundButton';
 import './todo.scss';
 
 export const Todo: React.FC<TodoProps> = ({
-  id,
   title,
   description,
   deleteTodo,
@@ -39,7 +38,7 @@ export const Todo: React.FC<TodoProps> = ({
           <RoundButton
             text="X"
             className="round-btn round-btn--red"
-            onClick={() => deleteTodo(id)}
+            onClick={deleteTodo}
           />
         </div>
       </div>
