@@ -21,7 +21,7 @@ export const Todo: React.FC<TodoProps> = ({
         <RoundButton
           text="X"
           className="round-btn round-btn--red"
-          onClick={() => deleteTodo(id)}
+          onClick={deleteTodo}
         />
       </div>
     </div>
