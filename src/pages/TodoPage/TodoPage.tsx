@@ -13,7 +13,6 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   deleteTodo,
   addTodo,
   visibleModal,
-  visibleModalWithEditFeature,
   handleVisibleModal,
   handleVisibleModalWithEditFeature,
   onCloseModalWithEditFeature,
@@ -54,7 +53,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
             onClick={handleVisibleModal}
           />
         </div>
-        {(visibleModal || visibleModalWithEditFeature) && (
+        {visibleModal && (
           <ModalContainer
             onClose={handleVisibleModal}
             addTodo={addTodo}

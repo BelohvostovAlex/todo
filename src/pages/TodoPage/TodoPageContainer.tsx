@@ -7,8 +7,6 @@ export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
   const [modalType, setModalType] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
-  const [visibleModalWithEditFeature, setVisibleEditModalWithEditFeature] =
-    useState(false);
   const [currIDForEdit, setCurrIDForEdit] = useState('');
   const [
     initialValueForModalWithEditFeature,
@@ -31,7 +29,7 @@ export const TodoPageContainer: React.FC = () => {
   };
 
   const handleVisibleModalWithEditFeature = (id: string) => {
-    setVisibleEditModalWithEditFeature(true);
+    setVisibleModal(true);
     setCurrIDForEdit(id);
     setModalType('edit');
     const currTodo = todos.find((todo) => todo.id === id);
@@ -43,7 +41,7 @@ export const TodoPageContainer: React.FC = () => {
   };
 
   const onCloseModalWithEditFeature = () => {
-    setVisibleEditModalWithEditFeature(false);
+    setVisibleModal(false);
   };
 
   const editTodo = (id: string, title: string, description: string) => {
@@ -74,7 +72,6 @@ export const TodoPageContainer: React.FC = () => {
       deleteTodo={deleteTodo}
       visibleModal={visibleModal}
       handleVisibleModal={handleVisibleModal}
-      visibleModalWithEditFeature={visibleModalWithEditFeature}
       handleVisibleModalWithEditFeature={handleVisibleModalWithEditFeature}
       currIDForEdit={currIDForEdit}
       editTodo={editTodo}
