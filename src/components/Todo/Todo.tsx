@@ -4,6 +4,8 @@ import { TodoProps } from './interfaces';
 import { RoundButton } from '../RoundButton/RoundButton';
 
 import './todo.scss';
+import { ButtonTypes } from '../Button/interfaces';
+import { TodoSelect } from '../TodoSelect/TodoSelect';
 
 export const Todo: React.FC<TodoProps> = ({
   title,
@@ -21,26 +23,18 @@ export const Todo: React.FC<TodoProps> = ({
         <h3 className="todo-text__descr">{description}</h3>
       </div>
       <div className="todo-right-part">
-        <select
-          name="todo-select"
-          id="todo-select"
-          onChange={handleOption}
-          className={classes}
-          value={selectedOption}
-        >
-          {avaliableOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <div className="todo-buttons">
-          <RoundButton
-            text="X"
-            className="round-btn round-btn--red"
-            onClick={deleteTodo}
-          />
-        </div>
+        <TodoSelect
+          avaliableOptions={avaliableOptions}
+          selectedOption={selectedOption}
+          handleOption={handleOption}
+          classes={classes}
+        />
+        <RoundButton
+          text="X"
+          type={ButtonTypes.BUTTON}
+          className="round-btn round-btn--red"
+          onClick={deleteTodo}
+        />
       </div>
     </div>
   );
