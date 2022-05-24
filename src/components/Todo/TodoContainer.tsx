@@ -14,7 +14,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   todos,
 }) => {
   const currentTodo = todos.find((todo) => todo.id === id);
-  const [selectedOption, setSelectedOption] = useState(currentTodo!.progress);
+  const [selectedOption, setSelectedOption] = useState(currentTodo!.status);
 
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
@@ -23,9 +23,9 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   };
 
   const classes = classNames('todo-select', {
-    'todo-select--blue': selectedOption === 'Todo',
-    'todo-select--green': selectedOption === 'In progress',
-    'todo-select--orange': selectedOption === 'Done',
+    'todo-select--blue': selectedOption === 'todo',
+    'todo-select--green': selectedOption === 'in_progress',
+    'todo-select--orange': selectedOption === 'done',
   });
   return (
     <Todo

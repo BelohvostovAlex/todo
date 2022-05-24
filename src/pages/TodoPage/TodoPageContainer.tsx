@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from 'react';
 
 import { TodoPage } from './TodoPage';
-import { ITodo } from '../../models/ITodo';
+import { ITodo, ITodoFull } from '../../models/ITodo';
+import axios from 'axios';
 
 export const TodoPageContainer: React.FC = () => {
-  const [todos, setTodos] = useState([] as ITodo[]);
-  const [filteredTodos, setFilteredTodos] = useState([] as ITodo[]);
+  const [todos, setTodos] = useState([] as ITodoFull[]);
+  const [filteredTodos, setFilteredTodos] = useState([] as ITodoFull[]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [avaliableOptions, setAvaliableOptions] = useState([
-    'Todo',
-    'In progress',
-    'Done',
+    'todo',
+    'in_progress',
+    'done',
   ]);
-  const [currentFilter, setCurrentFilter] = useState('All');
+  // const handleCurrentStatus = (status: string) => {
+  //   const neededStatus = Object.entries(avaliableOptions).find(
+  //     ([key, val]) => val === status
+  //   );
+  //   return neededStatus![0];
+  // };
+  const [currentFilter, setCurrentFilter] = useState('all');
+
+  const fetchData = async (url: string) => {
+    const { data } = await axios.get<ITodoFull[]>(url);
+    setTodos(data);
+  };
+
+  useEffect(() => {
+    fetchData('http://localhost:4000/api');
+  }, []);
 
   useEffect(() => {
     filterTodos(currentFilter);
@@ -20,11 +36,16 @@ export const TodoPageContainer: React.FC = () => {
 
   const hasTodo = !!filteredTodos.length;
 
-  const addTodo = (todo: ITodo) => {
-    setTodos([...todos, todo]);
+  const addTodo = async (todo: ITodo) => {
+    const { data } = await axios.post('http://localhost:4000/api/', todo);
+    setTodos([...todos, data]);
   };
 
-  const deleteTodo = (id: string) => {
+  const deleteTodo = async (id: string) => {
+    const currentTodo = todos.find((todo) => todo.id === id);
+    await axios.delete<ITodoFull>('http://localhost:4000/api/', {
+      data: { ...currentTodo },
+    });
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -32,20 +53,23 @@ export const TodoPageContainer: React.FC = () => {
     setVisibleModal((prev) => !prev);
   };
 
-  const handleTodoProgress = (id: string, progress: string) => {
+  const handleTodoProgress = async (id: string, status: string) => {
     setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, progress: progress } : todo
-      )
+      todos.map((todo) => (todo.id === id ? { ...todo, status: status } : todo))
     );
+    const currentTodo = todos.find((todo) => todo.id === id);
+    await axios.patch('http://localhost:4000/api/', {
+      ...currentTodo,
+      status: status,
+    });
   };
 
   const filterTodos = (title: string) => {
-    if (title === 'All') {
+    if (title === 'all') {
       setCurrentFilter(title);
       setFilteredTodos(todos);
     } else {
-      setFilteredTodos(todos.filter((todo) => todo.progress === title));
+      setFilteredTodos(todos.filter((todo) => todo.status === title));
       setCurrentFilter(title);
     }
   };

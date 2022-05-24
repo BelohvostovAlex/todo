@@ -1,6 +1,9 @@
 export interface ITodo {
-  id: string;
   title: string;
   description: string;
-  progress: string;
+}
+
+export interface ITodoFull extends ITodo {
+  id: string;
+  status: string;
 }

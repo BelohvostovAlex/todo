@@ -1,7 +1,7 @@
-import { ITodo } from '../../models/ITodo';
+import { ITodo, ITodoFull } from '../../models/ITodo';
 
 export interface TodoPageProps {
-  todos: ITodo[];
+  todos: ITodoFull[];
   addTodo: (todo: ITodo) => void;
   deleteTodo: (id: string) => void;
   visibleModal: boolean;

@@ -35,14 +35,14 @@ export const TodoPage: React.FC<TodoPageProps> = ({
           <EmptyBlock text={`There is nothing in '${currentFilter}' now...`} />
         ) : (
           <div className="todo-page__wrapper">
-            {todos.map(({ id, title, description, progress }) => {
+            {todos.map(({ id, title, description, status }) => {
               return (
                 <TodoContainer
                   key={id}
                   title={title}
                   description={description}
                   id={id}
-                  progress={progress}
+                  status={status}
                   todos={todos}
                   deleteTodo={() => deleteTodo(id)}
                   avaliableOptions={avaliableOptions}
@@ -61,11 +61,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
           />
         </div>
         {visibleModal && (
-          <ModalContainer
-            onClose={handleVisibleModal}
-            addTodo={addTodo}
-            avaliableOptions={avaliableOptions}
-          />
+          <ModalContainer onClose={handleVisibleModal} addTodo={addTodo} />
         )}
       </div>
     </div>

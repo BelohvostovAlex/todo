@@ -17,5 +17,4 @@ export interface ModalProps {
 export interface ModalContainerProps {
   onClose: () => void;
   addTodo: (todo: ITodo) => void;
-  avaliableOptions: string[];
 }

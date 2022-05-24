@@ -7,10 +7,10 @@ export const FilterListContainer: React.FC<FilterListContainerProps> = ({
   currentFilter,
 }) => {
   const [filterValuesList, setFilterValuesList] = useState([
-    'All',
-    'Todo',
-    'In progress',
-    'Done',
+    'all',
+    'todo',
+    'in_progress',
+    'done',
   ]);
 
   const handleFilterList = (title: string) => {
