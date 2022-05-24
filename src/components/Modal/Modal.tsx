@@ -12,7 +12,7 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   handleDescription,
   onClose,
-  createTodo,
+  onSubmit,
 }) => {
   return (
     <div className="modal">
@@ -51,7 +51,7 @@ export const Modal: React.FC<ModalProps> = ({
             text="Create"
             type={ButtonTypes.BUTTON}
             className="button button--blue"
-            onClick={createTodo}
+            onClick={onSubmit}
           />
           <Button
             text="Cancel"

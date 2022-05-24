@@ -30,7 +30,7 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       description={description}
       handleDescription={handleDescription}
       onClose={onClose}
-      createTodo={createTodo}
+      onSubmit={createTodo}
     />
   );
 };
