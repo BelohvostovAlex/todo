@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
+import { ButtonTypes } from '../Button/interfaces';
 import { RoundButton } from '../RoundButton/RoundButton';
 import { ModalProps } from './interfaces';
 
@@ -18,6 +19,7 @@ export const Modal: React.FC<ModalProps> = ({
       <form className="modal-form">
         <RoundButton
           text="X"
+          type={ButtonTypes.BUTTON}
           className="round-btn round-btn--gray round-btn--toRight"
           onClick={onClose}
         />
@@ -47,11 +49,13 @@ export const Modal: React.FC<ModalProps> = ({
         <div className="modal-form__buttons">
           <Button
             text="Create"
+            type={ButtonTypes.BUTTON}
             className="button button--blue"
             onClick={createTodo}
           />
           <Button
             text="Cancel"
+            type={ButtonTypes.BUTTON}
             className="button button--red"
             onClick={onClose}
           />

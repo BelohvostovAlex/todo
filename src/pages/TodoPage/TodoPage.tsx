@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../../components/Button';
+import { ButtonTypes } from '../../components/Button/interfaces';
 import { EmptyBlock } from '../../components/EmptyBlock/EmptyBlock';
 import { ModalContainer } from '../../components/Modal';
 import { PageHeader } from '../../components/PageHeader';
@@ -41,6 +42,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
         <div className="todo-page__button-wrapper">
           <Button
             text="Create new"
+            type={ButtonTypes.BUTTON}
             className="button button--green"
             onClick={handleVisibleModal}
           />
