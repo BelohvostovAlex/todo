@@ -4,6 +4,7 @@ import { TodoProps } from './interfaces';
 import { RoundButton } from '../RoundButton/RoundButton';
 
 import './todo.scss';
+import { ButtonTypes } from '../Button/interfaces';
 
 export const Todo: React.FC<TodoProps> = ({
   title,
@@ -20,11 +21,13 @@ export const Todo: React.FC<TodoProps> = ({
       <div className="todo-buttons">
         <RoundButton
           text="X"
+          type={ButtonTypes.BUTTON}
           className="round-btn round-btn--red"
           onClick={deleteTodo}
         />
         <RoundButton
           text="E"
+          type={ButtonTypes.BUTTON}
           className="round-btn round-btn--yellow"
           onClick={handleVisibleModalWithEditFeature}
         />

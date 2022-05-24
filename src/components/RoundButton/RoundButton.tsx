@@ -6,10 +6,11 @@ import './roundButton.scss';
 export const RoundButton: React.FC<RoundButtonProps> = ({
   text,
   className,
+  type,
   onClick,
 }) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} type={type}>
       {text}
     </button>
   );

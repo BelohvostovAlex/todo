@@ -3,6 +3,8 @@ import { Button } from '../Button';
 import { RoundButton } from '../RoundButton/RoundButton';
 import { ModalProps } from './interfaces';
 
+import { ButtonTypes } from '../Button/interfaces';
+
 import './modal.scss';
 
 export const Modal: React.FC<ModalProps> = ({
@@ -11,19 +13,17 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   handleDescription,
   onClose,
-  onCloseModalWithEditFeature,
-  createTodo,
-  editTodo,
-  currIDForEdit,
+  onSubmit,
   type,
 }) => {
   return (
     <div className="modal">
-      <form className="modal-form">
+      <form className="modal-form" onSubmit={onSubmit}>
         <RoundButton
           text="X"
           className="round-btn round-btn--gray round-btn--toRight"
-          onClick={type === 'edit' ? onCloseModalWithEditFeature : onClose}
+          type={ButtonTypes.BUTTON}
+          onClick={onClose}
         />
         <label className="modal-form__label" htmlFor="modal-form-text">
           Title
@@ -49,33 +49,17 @@ export const Modal: React.FC<ModalProps> = ({
           onChange={handleDescription}
         ></textarea>
         <div className="modal-form__buttons">
-          {type === 'edit' ? (
-            <>
-              <Button
-                text="Edit"
-                className="button button--blue"
-                onClick={() => editTodo(currIDForEdit, title, description)}
-              />
-              <Button
-                text="Cancel"
-                className="button button--red"
-                onClick={onCloseModalWithEditFeature}
-              />
-            </>
-          ) : (
-            <>
-              <Button
-                text="Create"
-                className="button button--blue"
-                onClick={createTodo}
-              />
-              <Button
-                text="Cancel"
-                className="button button--red"
-                onClick={onClose}
-              />
-            </>
-          )}
+          <Button
+            text={type === 'create' ? 'Create' : 'Edit'}
+            type={ButtonTypes.SUBMIT}
+            className="button button--blue"
+          />
+          <Button
+            text="Cancel"
+            type={ButtonTypes.BUTTON}
+            className="button button--red"
+            onClick={onClose}
+          />
         </div>
       </form>
     </div>

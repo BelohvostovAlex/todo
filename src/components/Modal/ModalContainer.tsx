@@ -8,7 +8,6 @@ import { Modal } from './Modal';
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
   addTodo,
-  onCloseModalWithEditFeature,
   editTodo,
   currIDForEdit,
   modalType,
@@ -30,6 +29,11 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
     onClose();
   };
 
+  const onSubmit = () => {
+    if (modalType === 'create') createTodo();
+    else editTodo(currIDForEdit, title, description);
+  };
+
   return (
     <Modal
       title={title}
@@ -37,10 +41,7 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       description={description}
       handleDescription={handleDescription}
       onClose={onClose}
-      createTodo={createTodo}
-      onCloseModalWithEditFeature={onCloseModalWithEditFeature}
-      editTodo={editTodo}
-      currIDForEdit={currIDForEdit}
+      onSubmit={onSubmit}
       type={modalType}
     />
   );
