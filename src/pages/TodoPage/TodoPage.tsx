@@ -17,10 +17,9 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   handleVisibleModal,
   handleVisibleModalWithEditFeature,
   editTodo,
-  currIDForEdit,
   hasTodo,
   modalType,
-  initialValueForModalWithEditFeature,
+  initialValue,
 }) => {
   return (
     <div className="todo-page">
@@ -59,11 +58,8 @@ export const TodoPage: React.FC<TodoPageProps> = ({
             onClose={handleVisibleModal}
             addTodo={addTodo}
             editTodo={editTodo}
-            currIDForEdit={currIDForEdit}
             modalType={modalType}
-            initialValueForModalWithEditFeature={
-              initialValueForModalWithEditFeature
-            }
+            initialValue={initialValue}
           />
         )}
       </div>

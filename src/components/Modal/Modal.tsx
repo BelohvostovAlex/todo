@@ -18,11 +18,10 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <div className="modal">
-      <form className="modal-form" onSubmit={onSubmit}>
+      <form className="modal-form">
         <RoundButton
           text="X"
           className="round-btn round-btn--gray round-btn--toRight"
-          type={ButtonTypes.BUTTON}
           onClick={onClose}
         />
         <label className="modal-form__label" htmlFor="modal-form-text">
@@ -53,10 +52,10 @@ export const Modal: React.FC<ModalProps> = ({
             text={type === 'create' ? 'Create' : 'Edit'}
             type={ButtonTypes.SUBMIT}
             className="button button--blue"
+            onClick={onSubmit}
           />
           <Button
             text="Cancel"
-            type={ButtonTypes.BUTTON}
             className="button button--red"
             onClick={onClose}
           />

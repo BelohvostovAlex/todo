@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 
 import { TodoPage } from './TodoPage';
-import { ITodo } from '../../models/ITodo';
+import { ITodo, IPureTodo } from '../../models/ITodo';
+import { v4 } from 'uuid';
 
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
   const [modalType, setModalType] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
-  const [currIDForEdit, setCurrIDForEdit] = useState('');
-  const [
-    initialValueForModalWithEditFeature,
-    setInitialValueForModalWithEditFeature,
-  ] = useState({} as ITodo);
+  const [initialValue, setInitialValue] = useState({} as ITodo);
 
   const hasTodo = !!todos.length;
 
-  const addTodo = (todo: ITodo) => {
-    setTodos([...todos, todo]);
+  const addTodo = (todo: IPureTodo) => {
+    setTodos([...todos, { ...todo, id: v4() }]);
   };
 
   const deleteTodo = (id: string) => {
@@ -24,23 +21,24 @@ export const TodoPageContainer: React.FC = () => {
   };
 
   const handleVisibleModal = () => {
+    setInitialValue({} as ITodo);
     setVisibleModal((prev) => !prev);
     setModalType('create');
   };
 
   const handleVisibleModalWithEditFeature = (id: string) => {
     setVisibleModal((prev) => !prev);
-    setCurrIDForEdit(id);
     setModalType('edit');
     const currTodo = todos.find((todo) => todo.id === id);
-    setInitialValueForModalWithEditFeature({
+    setInitialValue({
       id: currTodo!.id,
       title: currTodo!.title,
       description: currTodo!.description,
     });
   };
 
-  const editTodo = (id: string, title: string, description: string) => {
+  const editTodo = (title: string, description: string) => {
+    const { id } = initialValue;
     const currTodo = todos.find((todo) => todo.id === id);
     const editedTodo = {
       ...currTodo,
@@ -69,11 +67,10 @@ export const TodoPageContainer: React.FC = () => {
       visibleModal={visibleModal}
       handleVisibleModal={handleVisibleModal}
       handleVisibleModalWithEditFeature={handleVisibleModalWithEditFeature}
-      currIDForEdit={currIDForEdit}
       editTodo={editTodo}
       hasTodo={hasTodo}
       modalType={modalType}
-      initialValueForModalWithEditFeature={initialValueForModalWithEditFeature}
+      initialValue={initialValue}
     />
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { v4 } from 'uuid';
 
 import { useInput } from '../../hooks/useInput';
 import { ModalContainerProps } from './interfaces';
@@ -9,29 +8,22 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
   addTodo,
   editTodo,
-  currIDForEdit,
   modalType,
-  initialValueForModalWithEditFeature,
+  initialValue,
 }) => {
-  const { title: initialTitle } = initialValueForModalWithEditFeature;
-  const { description: initialDescription } =
-    initialValueForModalWithEditFeature;
+  const { title: initialTitle, description: initialDescription } = initialValue;
 
-  const [title, handleTitle] = useInput(
-    modalType === 'edit' ? initialTitle : ''
-  );
-  const [description, handleDescription] = useInput(
-    modalType === 'edit' ? initialDescription : ''
-  );
+  const [title, handleTitle] = useInput(initialTitle);
+  const [description, handleDescription] = useInput(initialDescription);
+
   const createTodo = () => {
-    addTodo({ id: v4(), title: title, description: description });
+    addTodo({ title: title, description: description });
 
     onClose();
   };
 
-  const onSubmit = () => {
-    if (modalType === 'create') createTodo();
-    else editTodo(currIDForEdit, title, description);
+  const onSubmitModalWithEditFeature = () => {
+    editTodo(title, description);
   };
 
   return (
@@ -41,7 +33,9 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       description={description}
       handleDescription={handleDescription}
       onClose={onClose}
-      onSubmit={onSubmit}
+      onSubmit={
+        modalType === 'create' ? createTodo : onSubmitModalWithEditFeature
+      }
       type={modalType}
     />
   );
