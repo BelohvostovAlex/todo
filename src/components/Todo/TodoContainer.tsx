@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import { Todo } from './Todo';
 import { TodoContainerProps } from './interfaces';
 
+const availiableOptions = ['Todo', 'In progress', 'Done'];
+
 export const TodoContainer: React.FC<TodoContainerProps> = ({
   id,
   title,
   description,
   deleteTodo,
 }) => {
-  const availiableOptions = ['Todo', 'In progress', 'Done'];
   const [selectedOption, setSelectedOption] = useState('');
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
