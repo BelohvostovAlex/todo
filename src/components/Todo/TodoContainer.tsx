@@ -9,12 +9,12 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   title,
   description,
   deleteTodo,
-  avaliableOptions,
+  availiableOptions,
   handleTodoProgress,
   todos,
 }) => {
   const currentTodo = todos.find((todo) => todo.id === id);
-  const [selectedOption, setSelectedOption] = useState(currentTodo!.progress);
+  const [selectedOption, setSelectedOption] = useState(currentTodo!.status);
 
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
@@ -33,7 +33,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
       title={title}
       description={description}
       deleteTodo={() => deleteTodo(id)}
-      avaliableOptions={avaliableOptions}
+      availiableOptions={availiableOptions}
       selectedOption={selectedOption}
       handleOption={handleOption}
       classes={classes}

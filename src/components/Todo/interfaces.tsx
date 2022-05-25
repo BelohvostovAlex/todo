@@ -6,7 +6,7 @@ export interface TodoProps {
   title: string;
   description: string;
   deleteTodo: () => void;
-  avaliableOptions: string[];
+  availiableOptions: string[];
   selectedOption: string;
   handleOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   classes: string;
@@ -16,9 +16,9 @@ export interface TodoContainerProps {
   id: string;
   title: string;
   description: string;
-  progress: string;
+  status: string;
   deleteTodo: (id: string) => void;
-  avaliableOptions: string[];
+  availiableOptions: string[];
   handleTodoProgress: (id: string, progress: string) => void;
   todos: ITodo[];
 }

@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { TodoPage } from './TodoPage';
-import { ITodo } from '../../models/ITodo';
+import { IPureTodo, ITodo } from '../../models/ITodo';
+import { v4 } from 'uuid';
 
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
   const [filteredTodos, setFilteredTodos] = useState([] as ITodo[]);
   const [visibleModal, setVisibleModal] = useState(false);
-  const [avaliableOptions, setAvaliableOptions] = useState([
-    'Todo',
-    'In progress',
-    'Done',
-  ]);
+  const availiableOptions = ['Todo', 'In progress', 'Done'];
   const [currentFilter, setCurrentFilter] = useState('All');
-
-  useEffect(() => {
-    filterTodos(currentFilter);
-  }, [todos]);
 
   const hasTodo = !!filteredTodos.length;
 
-  const addTodo = (todo: ITodo) => {
-    setTodos([...todos, todo]);
+  const addTodo = (todo: IPureTodo) => {
+    setTodos([...todos, { ...todo, id: v4() }]);
   };
 
   const deleteTodo = (id: string) => {
@@ -32,23 +25,25 @@ export const TodoPageContainer: React.FC = () => {
     setVisibleModal((prev) => !prev);
   };
 
-  const handleTodoProgress = (id: string, progress: string) => {
+  const handleTodoProgress = (id: string, status: string) => {
     setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, progress: progress } : todo
-      )
+      todos.map((todo) => (todo.id === id ? { ...todo, status: status } : todo))
     );
   };
 
-  const filterTodos = (title: string) => {
-    if (title === 'All') {
+  const filterTodos = useCallback(
+    (title: string) => {
       setCurrentFilter(title);
-      setFilteredTodos(todos);
-    } else {
-      setFilteredTodos(todos.filter((todo) => todo.progress === title));
-      setCurrentFilter(title);
-    }
-  };
+      if (title === 'All') return setFilteredTodos(todos);
+
+      return setFilteredTodos(todos.filter((todo) => todo.status === title));
+    },
+    [todos]
+  );
+
+  useEffect(() => {
+    filterTodos(currentFilter);
+  }, [todos, currentFilter, filterTodos]);
 
   return (
     <TodoPage
@@ -59,7 +54,7 @@ export const TodoPageContainer: React.FC = () => {
       handleVisibleModal={handleVisibleModal}
       hasTodo={hasTodo}
       filterTodos={filterTodos}
-      avaliableOptions={avaliableOptions}
+      availiableOptions={availiableOptions}
       handleTodoProgress={handleTodoProgress}
       currentFilter={currentFilter}
     />

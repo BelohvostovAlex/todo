@@ -1,14 +1,14 @@
-import { ITodo } from '../../models/ITodo';
+import { IPureTodo, ITodo } from '../../models/ITodo';
 
 export interface TodoPageProps {
   todos: ITodo[];
-  addTodo: (todo: ITodo) => void;
+  addTodo: (todo: IPureTodo) => void;
   deleteTodo: (id: string) => void;
   visibleModal: boolean;
   handleVisibleModal: () => void;
   hasTodo: boolean;
   filterTodos: (title: string) => void;
-  avaliableOptions: string[];
+  availiableOptions: string[];
   handleTodoProgress: (id: string, progress: string) => void;
   currentFilter: string;
 }

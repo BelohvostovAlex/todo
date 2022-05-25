@@ -7,6 +7,6 @@ export enum ButtonTypes {
 export interface ButtonProps {
   text: string;
   className: string;
-  type: ButtonTypes;
+  type?: ButtonTypes;
   onClick?: () => void;
 }

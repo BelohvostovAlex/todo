@@ -4,14 +4,14 @@ import { TodoProps } from './interfaces';
 import { RoundButton } from '../RoundButton/RoundButton';
 
 import './todo.scss';
-import { ButtonTypes } from '../Button/interfaces';
+
 import { TodoSelect } from '../TodoSelect/TodoSelect';
 
 export const Todo: React.FC<TodoProps> = ({
   title,
   description,
   deleteTodo,
-  avaliableOptions,
+  availiableOptions,
   selectedOption,
   handleOption,
   classes,
@@ -24,14 +24,13 @@ export const Todo: React.FC<TodoProps> = ({
       </div>
       <div className="todo-right-part">
         <TodoSelect
-          avaliableOptions={avaliableOptions}
+          availiableOptions={availiableOptions}
           selectedOption={selectedOption}
           handleOption={handleOption}
           classes={classes}
         />
         <RoundButton
           text="X"
-          type={ButtonTypes.BUTTON}
           className="round-btn round-btn--red"
           onClick={deleteTodo}
         />

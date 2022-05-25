@@ -19,7 +19,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   handleVisibleModal,
   hasTodo,
   filterTodos,
-  avaliableOptions,
+  availiableOptions,
   handleTodoProgress,
   currentFilter,
 }) => {
@@ -35,17 +35,17 @@ export const TodoPage: React.FC<TodoPageProps> = ({
           <EmptyBlock text={`There is nothing in '${currentFilter}' now...`} />
         ) : (
           <div className="todo-page__wrapper">
-            {todos.map(({ id, title, description, progress }) => {
+            {todos.map(({ id, title, description, status }) => {
               return (
                 <TodoContainer
                   key={id}
                   title={title}
                   description={description}
                   id={id}
-                  progress={progress}
+                  status={status}
                   todos={todos}
                   deleteTodo={() => deleteTodo(id)}
-                  avaliableOptions={avaliableOptions}
+                  availiableOptions={availiableOptions}
                   handleTodoProgress={handleTodoProgress}
                 />
               );
@@ -64,7 +64,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
           <ModalContainer
             onClose={handleVisibleModal}
             addTodo={addTodo}
-            avaliableOptions={avaliableOptions}
+            availiableOptions={availiableOptions}
           />
         )}
       </div>

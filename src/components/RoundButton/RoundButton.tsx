@@ -10,7 +10,7 @@ export const RoundButton: React.FC<RoundButtonProps> = ({
   type,
 }) => {
   return (
-    <button className={className} type={type} onClick={onClick}>
+    <button className={className} type={'button' || type} onClick={onClick}>
       {text}
     </button>
   );
