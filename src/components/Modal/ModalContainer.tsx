@@ -6,8 +6,7 @@ import { Modal } from './Modal';
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
-  addTodo,
-  editTodo,
+  onSubmit,
   modalType,
   initialValue,
 }) => {
@@ -18,11 +17,10 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   //пока не вынес useInput в Modal, т.к. использую в функции handleSubmit его value
 
   const handleSubmit = () => {
-    if (modalType === 'create') {
-      addTodo({ title: title, description: description });
-    } else {
-      editTodo({ title: title, description: description });
-    }
+    onSubmit({
+      title,
+      description,
+    });
   };
 
   return (

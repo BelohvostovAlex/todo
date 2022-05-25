@@ -12,14 +12,12 @@ import './todoPage.scss';
 export const TodoPage: React.FC<TodoPageProps> = ({
   todos,
   deleteTodo,
-  addTodo,
   visibleModal,
   handleVisibleModal,
-  handleVisibleModalWithEditFeature,
-  editTodo,
   hasTodo,
   modalType,
   initialValue,
+  handleSubmit,
 }) => {
   return (
     <div className="todo-page">
@@ -38,7 +36,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
                   id={id}
                   deleteTodo={() => deleteTodo(id)}
                   handleVisibleModalWithEditFeature={() =>
-                    handleVisibleModalWithEditFeature(id)
+                    handleVisibleModal(id)
                   }
                 />
               );
@@ -56,10 +54,9 @@ export const TodoPage: React.FC<TodoPageProps> = ({
         {visibleModal && (
           <ModalContainer
             onClose={handleVisibleModal}
-            addTodo={addTodo}
-            editTodo={editTodo}
             modalType={modalType}
             initialValue={initialValue}
+            onSubmit={handleSubmit}
           />
         )}
       </div>

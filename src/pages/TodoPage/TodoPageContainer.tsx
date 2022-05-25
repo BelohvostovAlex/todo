@@ -4,11 +4,17 @@ import { TodoPage } from './TodoPage';
 import { ITodo, IPureTodo } from '../../models/ITodo';
 import { v4 } from 'uuid';
 
+const defaultValue = {
+  id: '',
+  title: '',
+  description: '',
+};
+
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
   const [modalType, setModalType] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
-  const [initialValue, setInitialValue] = useState({} as ITodo);
+  const [initialValue, setInitialValue] = useState(defaultValue as ITodo);
 
   const hasTodo = !!todos.length;
 
@@ -21,21 +27,23 @@ export const TodoPageContainer: React.FC = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const handleVisibleModal = () => {
-    setInitialValue({} as ITodo);
-    setVisibleModal((prev) => !prev);
-    setModalType('create');
-  };
+  const handleVisibleModal = (id?: string) => {
+    const isEdit = typeof id === 'string';
+    let defaultValue = {
+      id: '',
+      title: '',
+      description: '',
+    };
 
-  const handleVisibleModalWithEditFeature = (id: string) => {
     setVisibleModal((prev) => !prev);
-    setModalType('edit');
-    const currTodo = todos.find((todo) => todo.id === id);
-    setInitialValue({
-      id: currTodo!.id,
-      title: currTodo!.title,
-      description: currTodo!.description,
-    });
+    setModalType(isEdit ? 'edit' : 'create');
+
+    if (isEdit) {
+      const currTodo = todos.find((todo) => todo.id === id);
+      defaultValue = { ...currTodo! };
+    }
+
+    setInitialValue(defaultValue);
   };
 
   const editTodo = (todo: IPureTodo) => {
@@ -59,15 +67,16 @@ export const TodoPageContainer: React.FC = () => {
     setVisibleModal((prev) => !prev);
   };
 
+  const handleSubmit = (data: IPureTodo) =>
+    modalType === 'create' ? addTodo(data) : editTodo(data);
+
   return (
     <TodoPage
       todos={todos.slice(-5)}
-      addTodo={addTodo}
       deleteTodo={deleteTodo}
       visibleModal={visibleModal}
       handleVisibleModal={handleVisibleModal}
-      handleVisibleModalWithEditFeature={handleVisibleModalWithEditFeature}
-      editTodo={editTodo}
+      handleSubmit={handleSubmit}
       hasTodo={hasTodo}
       modalType={modalType}
       initialValue={initialValue}
