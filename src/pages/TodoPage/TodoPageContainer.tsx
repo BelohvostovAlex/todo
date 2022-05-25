@@ -4,11 +4,12 @@ import { TodoPage } from './TodoPage';
 import { IPureTodo, ITodo } from '../../models/ITodo';
 import { v4 } from 'uuid';
 
+const availiableOptions = ['Todo', 'In progress', 'Done'];
+
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
   const [filteredTodos, setFilteredTodos] = useState([] as ITodo[]);
   const [visibleModal, setVisibleModal] = useState(false);
-  const availiableOptions = ['Todo', 'In progress', 'Done'];
   const [currentFilter, setCurrentFilter] = useState('All');
 
   const hasTodo = !!filteredTodos.length;
