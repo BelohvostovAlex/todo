@@ -7,7 +7,7 @@ export interface TodoPageProps {
   visibleModal: boolean;
   handleVisibleModal: () => void;
   handleVisibleModalWithEditFeature: (id: string) => void;
-  editTodo: (title: string, description: string) => void;
+  editTodo: (todo: IPureTodo) => void;
   hasTodo: boolean;
   modalType: string;
   initialValue: {

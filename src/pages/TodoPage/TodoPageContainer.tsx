@@ -14,6 +14,7 @@ export const TodoPageContainer: React.FC = () => {
 
   const addTodo = (todo: IPureTodo) => {
     setTodos([...todos, { ...todo, id: v4() }]);
+    handleVisibleModal();
   };
 
   const deleteTodo = (id: string) => {
@@ -37,13 +38,12 @@ export const TodoPageContainer: React.FC = () => {
     });
   };
 
-  const editTodo = (title: string, description: string) => {
+  const editTodo = (todo: IPureTodo) => {
     const { id } = initialValue;
     const currTodo = todos.find((todo) => todo.id === id);
     const editedTodo = {
       ...currTodo,
-      title,
-      description,
+      ...todo,
     };
     setTodos(
       todos.map((todo) => {

@@ -3,8 +3,6 @@ import { Button } from '../Button';
 import { RoundButton } from '../RoundButton/RoundButton';
 import { ModalProps } from './interfaces';
 
-import { ButtonTypes } from '../Button/interfaces';
-
 import './modal.scss';
 
 export const Modal: React.FC<ModalProps> = ({
@@ -50,7 +48,6 @@ export const Modal: React.FC<ModalProps> = ({
         <div className="modal-form__buttons">
           <Button
             text={type === 'create' ? 'Create' : 'Edit'}
-            type={ButtonTypes.SUBMIT}
             className="button button--blue"
             onClick={onSubmit}
           />
