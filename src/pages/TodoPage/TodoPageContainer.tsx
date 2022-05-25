@@ -4,18 +4,19 @@ import axios from 'axios';
 import { TodoPage } from './TodoPage';
 import { ITodo, IPureTodo } from '../../models/ITodo';
 
+const todoOptionsBackend: Record<string, string> = {
+  Todo: 'todo',
+  'In progress': 'in_progress',
+  Done: 'done',
+};
+
+const availiableOptions = ['todo', 'in_progress', 'done'];
+
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
   const [filteredTodos, setFilteredTodos] = useState([] as ITodo[]);
   const [visibleModal, setVisibleModal] = useState(false);
-  const availiableOptions = ['todo', 'in_progress', 'done'];
-  // const handleCurrentStatus = (status: string) => {
-  //   const neededStatus = Object.entries(avaliableOptions).find(
-  //     ([key, val]) => val === status
-  //   );
-  //   return neededStatus![0];
-  // };
-  const [currentFilter, setCurrentFilter] = useState('all');
+  const [currentFilter, setCurrentFilter] = useState('All');
 
   const fetchData = async (url: string) => {
     const { data } = await axios.get<ITodo[]>(url);
@@ -59,9 +60,11 @@ export const TodoPageContainer: React.FC = () => {
   const filterTodos = useCallback(
     (title: string) => {
       setCurrentFilter(title);
-      if (title === 'all') return setFilteredTodos(todos);
+      if (title === 'All') return setFilteredTodos(todos);
 
-      return setFilteredTodos(todos.filter((todo) => todo.status === title));
+      return setFilteredTodos(
+        todos.filter((todo) => todo.status === todoOptionsBackend[title])
+      );
     },
     [todos]
   );

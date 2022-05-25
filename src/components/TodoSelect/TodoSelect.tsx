@@ -1,6 +1,12 @@
 import React from 'react';
 import { TodoSelectProps } from './interfaces';
 
+const availiableOptionsObj: Record<string, string> = {
+  todo: 'Todo',
+  in_progress: 'In progress',
+  done: 'Done',
+};
+
 export const TodoSelect: React.FC<TodoSelectProps> = ({
   availiableOptions,
   selectedOption,
@@ -17,7 +23,7 @@ export const TodoSelect: React.FC<TodoSelectProps> = ({
     >
       {availiableOptions.map((option) => (
         <option key={option} value={option}>
-          {option}
+          {availiableOptionsObj[option]}
         </option>
       ))}
     </select>

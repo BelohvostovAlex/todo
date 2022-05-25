@@ -1,16 +1,16 @@
 import React from 'react';
 
 import './buttons.scss';
-import { ButtonProps } from './interfaces';
+import { ButtonProps, ButtonTypes } from './interfaces';
 
 export const Button: React.FC<ButtonProps> = ({
   text,
-  type,
+  type = ButtonTypes.BUTTON,
   className,
   onClick,
 }) => {
   return (
-    <button className={className} type={'button' || type} onClick={onClick}>
+    <button className={className} type={type} onClick={onClick}>
       {text}
     </button>
   );
