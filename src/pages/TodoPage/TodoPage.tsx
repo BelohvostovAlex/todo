@@ -1,11 +1,11 @@
 import React from 'react';
+
 import { Button } from '../../components/Button';
 import { ButtonTypes } from '../../components/Button/interfaces';
 import { EmptyBlock } from '../../components/EmptyBlock/EmptyBlock';
 import { FilterListContainer } from '../../components/FilterList';
 import { ModalContainer } from '../../components/Modal';
 import { PageHeader } from '../../components/PageHeader';
-
 import { TodoContainer } from '../../components/Todo/TodoContainer';
 import { TodoPageProps } from './interfaces';
 
@@ -19,7 +19,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   handleVisibleModal,
   hasTodo,
   filterTodos,
-  avaliableOptions,
+  availiableOptions,
   handleTodoProgress,
   currentFilter,
 }) => {
@@ -45,7 +45,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
                   status={status}
                   todos={todos}
                   deleteTodo={() => deleteTodo(id)}
-                  avaliableOptions={avaliableOptions}
+                  availiableOptions={availiableOptions}
                   handleTodoProgress={handleTodoProgress}
                 />
               );

@@ -1,9 +1,9 @@
-export interface ITodo {
+export interface IPureTodo {
   title: string;
   description: string;
 }
 
-export interface ITodoFull extends ITodo {
+export interface ITodo extends IPureTodo {
   id: string;
   status: string;
 }

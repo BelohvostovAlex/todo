@@ -2,7 +2,7 @@ import React from 'react';
 import { TodoSelectProps } from './interfaces';
 
 export const TodoSelect: React.FC<TodoSelectProps> = ({
-  avaliableOptions,
+  availiableOptions,
   selectedOption,
   handleOption,
   classes,
@@ -15,7 +15,7 @@ export const TodoSelect: React.FC<TodoSelectProps> = ({
       className={classes}
       value={selectedOption}
     >
-      {avaliableOptions.map((option) => (
+      {availiableOptions.map((option) => (
         <option key={option} value={option}>
           {option}
         </option>

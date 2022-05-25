@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITodo } from '../../models/ITodo';
+import { IPureTodo } from '../../models/ITodo';
 
 export interface ModalProps {
   title: string;
@@ -16,5 +16,5 @@ export interface ModalProps {
 
 export interface ModalContainerProps {
   onClose: () => void;
-  addTodo: (todo: ITodo) => void;
+  addTodo: (todo: IPureTodo) => void;
 }
