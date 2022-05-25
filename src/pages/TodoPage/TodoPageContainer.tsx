@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 
 import { TodoPage } from './TodoPage';
-import { ITodo } from '../../models/ITodo';
+import { IPureTodo, ITodo } from '../../models/ITodo';
+import { v4 } from 'uuid';
 
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
   const [visibleModal, setVisibleModal] = useState(false);
 
-  const hasTodo = todos.length ? true : false;
+  const hasTodo = !!todos.length;
 
-  const addTodo = (todo: ITodo) => {
-    setTodos([...todos, todo]);
+  const addTodo = (todo: IPureTodo) => {
+    setTodos([...todos, { ...todo, id: v4() }]);
   };
 
   const deleteTodo = (id: string) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { v4 } from 'uuid';
 
 import { useInput } from '../../hooks/useInput';
 import { ModalContainerProps } from './interfaces';
@@ -13,7 +12,7 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   const [description, handleDescription] = useInput();
 
   const createTodo = () => {
-    addTodo({ id: v4(), title: title, description: description });
+    addTodo({ title: title, description: description });
 
     onClose();
   };

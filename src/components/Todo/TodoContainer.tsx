@@ -10,11 +10,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   description,
   deleteTodo,
 }) => {
-  const [avaliableOptions, setAvaliableOptions] = useState([
-    'Todo',
-    'In progress',
-    'Done',
-  ]);
+  const availiableOptions = ['Todo', 'In progress', 'Done'];
   const [selectedOption, setSelectedOption] = useState('');
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
@@ -30,7 +26,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
       title={title}
       description={description}
       deleteTodo={() => deleteTodo(id)}
-      avaliableOptions={avaliableOptions}
+      availiableOptions={availiableOptions}
       selectedOption={selectedOption}
       handleOption={handleOption}
       classes={classes}
