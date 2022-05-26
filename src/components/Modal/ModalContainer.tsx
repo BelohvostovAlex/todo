@@ -6,21 +6,28 @@ import { Modal } from './Modal';
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
-  addTodo,
   availiableOptions,
+  onSubmit,
+  modalType,
+  initialValue,
 }) => {
-  const [title, handleTitle] = useInput();
-  const [description, handleDescription] = useInput();
+  const {
+    title: initialTitle,
+    description: initialDescription,
+    status,
+  } = initialValue;
 
-  const createTodo = () => {
-    addTodo({
-      title: title,
-      description: description,
-      status: availiableOptions[0],
+  const [title, handleTitle] = useInput(initialTitle);
+  const [description, handleDescription] = useInput(initialDescription);
+
+  const handleSubmit = () => {
+    onSubmit({
+      title,
+      description,
+      status,
     });
-
-    onClose();
   };
+
   return (
     <Modal
       title={title}
@@ -28,7 +35,8 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       description={description}
       handleDescription={handleDescription}
       onClose={onClose}
-      onSubmit={createTodo}
+      onSubmit={handleSubmit}
+      type={modalType}
     />
   );
 };
