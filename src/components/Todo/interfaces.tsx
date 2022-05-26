@@ -9,6 +9,7 @@ export interface TodoProps {
   selectedOption: string;
   handleOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   classes: string;
+  handleVisibleModal: () => void;
 }
 
 export interface TodoContainerProps {
@@ -16,4 +17,5 @@ export interface TodoContainerProps {
   title: string;
   description: string;
   deleteTodo: (id: string) => void;
+  handleVisibleModal: () => void;
 }

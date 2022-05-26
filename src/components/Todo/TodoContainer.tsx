@@ -11,6 +11,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   title,
   description,
   deleteTodo,
+  handleVisibleModal,
 }) => {
   const [selectedOption, setSelectedOption] = useState('');
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -31,6 +32,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
       selectedOption={selectedOption}
       handleOption={handleOption}
       classes={classes}
+      handleVisibleModal={handleVisibleModal}
     />
   );
 };
