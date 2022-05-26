@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITodo } from '../../models/ITodo';
+import { IPureTodo } from '../../models/ITodo';
 
 export interface ModalProps {
   title: string;
@@ -11,10 +11,16 @@ export interface ModalProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onClose: () => void;
-  createTodo: () => void;
+  onSubmit: () => void;
+  type: string;
 }
 
 export interface ModalContainerProps {
   onClose: () => void;
-  addTodo: (todo: ITodo) => void;
+  onSubmit: (todo: IPureTodo) => void;
+  modalType: string;
+  initialValue: {
+    title: string;
+    description: string;
+  };
 }

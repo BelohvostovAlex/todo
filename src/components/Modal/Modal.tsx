@@ -11,7 +11,8 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   handleDescription,
   onClose,
-  createTodo,
+  onSubmit,
+  type,
 }) => {
   return (
     <div className="modal">
@@ -46,9 +47,9 @@ export const Modal: React.FC<ModalProps> = ({
         ></textarea>
         <div className="modal-form__buttons">
           <Button
-            text="Create"
+            text={type === 'create' ? 'Create' : 'Edit'}
             className="button button--blue"
-            onClick={createTodo}
+            onClick={onSubmit}
           />
           <Button
             text="Cancel"

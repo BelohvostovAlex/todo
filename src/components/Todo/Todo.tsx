@@ -6,10 +6,10 @@ import { RoundButton } from '../RoundButton/RoundButton';
 import './todo.scss';
 
 export const Todo: React.FC<TodoProps> = ({
-  id,
   title,
   description,
   deleteTodo,
+  handleVisibleModalWithEditFeature,
 }) => {
   return (
     <div className="todo">
@@ -22,6 +22,11 @@ export const Todo: React.FC<TodoProps> = ({
           text="X"
           className="round-btn round-btn--red"
           onClick={deleteTodo}
+        />
+        <RoundButton
+          text="E"
+          className="round-btn round-btn--yellow"
+          onClick={handleVisibleModalWithEditFeature}
         />
       </div>
     </div>
