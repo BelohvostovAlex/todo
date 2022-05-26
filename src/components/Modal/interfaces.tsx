@@ -12,9 +12,16 @@ export interface ModalProps {
   ) => void;
   onClose: () => void;
   onSubmit: () => void;
+  type: string;
 }
 
 export interface ModalContainerProps {
   onClose: () => void;
-  addTodo: (todo: IPureTodo) => void;
+  onSubmit: (todo: IPureTodo) => void;
+  modalType: string;
+  initialValue: {
+    title: string;
+    description: string;
+    status: string;
+  };
 }

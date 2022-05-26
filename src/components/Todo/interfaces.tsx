@@ -10,6 +10,7 @@ export interface TodoProps {
   selectedOption: string;
   handleOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   classes: string;
+  handleVisibleModal: () => void;
 }
 
 export interface TodoContainerProps {
@@ -21,4 +22,5 @@ export interface TodoContainerProps {
   availiableOptions: string[];
   handleTodoProgress: (id: string, progress: string) => void;
   todos: ITodo[];
+  handleVisibleModal: () => void;
 }

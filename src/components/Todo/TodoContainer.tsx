@@ -12,6 +12,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   availiableOptions,
   handleTodoProgress,
   todos,
+  handleVisibleModal,
 }) => {
   const currentTodo = todos.find((todo) => todo.id === id);
   const [selectedOption, setSelectedOption] = useState(currentTodo!.status);
@@ -37,6 +38,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
       selectedOption={selectedOption}
       handleOption={handleOption}
       classes={classes}
+      handleVisibleModal={handleVisibleModal}
     />
   );
 };

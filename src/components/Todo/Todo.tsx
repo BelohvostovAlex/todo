@@ -15,6 +15,7 @@ export const Todo: React.FC<TodoProps> = ({
   selectedOption,
   handleOption,
   classes,
+  handleVisibleModal,
 }) => {
   return (
     <div className="todo">
@@ -33,6 +34,11 @@ export const Todo: React.FC<TodoProps> = ({
           text="X"
           className="round-btn round-btn--red"
           onClick={deleteTodo}
+        />
+        <RoundButton
+          text="E"
+          className="round-btn round-btn--yellow"
+          onClick={handleVisibleModal}
         />
       </div>
     </div>
