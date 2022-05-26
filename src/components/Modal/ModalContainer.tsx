@@ -14,7 +14,6 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
 
   const [title, handleTitle] = useInput(initialTitle);
   const [description, handleDescription] = useInput(initialDescription);
-  //пока не вынес useInput в Modal, т.к. использую в функции handleSubmit его value
 
   const handleSubmit = () => {
     onSubmit({
