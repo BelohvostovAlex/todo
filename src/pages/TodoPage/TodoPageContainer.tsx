@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 
 import { TodoPage } from './TodoPage';
 import { ITodo, IPureTodo } from '../../models/ITodo';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../hooks/useActions';
 
 const todoOptionsBackend: Record<string, string> = {
   Todo: 'todo',
@@ -20,36 +21,36 @@ const defaultValue = {
 };
 
 export const TodoPageContainer: React.FC = () => {
-  const [todos, setTodos] = useState([] as ITodo[]);
   const [filteredTodos, setFilteredTodos] = useState([] as ITodo[]);
-  const [currentFilter, setCurrentFilter] = useState('All');
-  const [modalType, setModalType] = useState('');
-  const [visibleModal, setVisibleModal] = useState(false);
   const [initialValue, setInitialValue] = useState(defaultValue as ITodo);
 
-  const fetchData = async (url: string) => {
-    const { data } = await axios.get<ITodo[]>(url);
-    setTodos(data);
-  };
+  const { isVisible, type } = useTypedSelector((state) => state.modalReducer);
+  const { setVisible, setType } = useActions();
+  const { todos, filter } = useTypedSelector((state) => state.todosReducer);
+  const {
+    fetchTodos,
+    setFilter,
+    addTodoActionCreator,
+    deleteTodoActionCreator,
+    updateTodoActionCreator,
+    updateTodoStatusActionCreator,
+  } = useActions();
 
   useEffect(() => {
-    fetchData('http://localhost:4000/api');
+    fetchTodos();
   }, []);
 
   const hasTodo = !!filteredTodos.length;
 
   const addTodo = async (todo: IPureTodo) => {
-    const { data } = await axios.post('http://localhost:4000/api/', todo);
-    setTodos([...todos, data]);
-    handleVisibleModal();
+    addTodoActionCreator(todo);
+    setVisible(false);
   };
 
   const deleteTodo = async (id: string) => {
     const currentTodo = todos.find((todo) => todo.id === id);
-    await axios.delete<ITodo>('http://localhost:4000/api/', {
-      data: { ...currentTodo },
-    });
-    setTodos(todos.filter((todo) => todo.id !== id));
+
+    deleteTodoActionCreator(currentTodo!);
   };
 
   const handleVisibleModal = (id?: string) => {
@@ -61,8 +62,8 @@ export const TodoPageContainer: React.FC = () => {
       status: '',
     };
 
-    setVisibleModal((prev) => !prev);
-    setModalType(isEdit ? 'edit' : 'create');
+    setVisible(true);
+    setType(isEdit ? 'edit' : 'create');
 
     if (isEdit) {
       const currTodo = todos.find((todo) => todo.id === id);
@@ -73,19 +74,14 @@ export const TodoPageContainer: React.FC = () => {
   };
 
   const handleTodoProgress = async (id: string, status: string) => {
-    setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, status: status } : todo))
-    );
     const currentTodo = todos.find((todo) => todo.id === id);
-    await axios.patch('http://localhost:4000/api/', {
-      ...currentTodo,
-      status: status,
-    });
+
+    updateTodoStatusActionCreator({ ...currentTodo, status: status });
   };
 
   const filterTodos = useCallback(
     (title: string) => {
-      setCurrentFilter(title);
+      setFilter(title);
       if (title === 'All') return setFilteredTodos(todos);
 
       return setFilteredTodos(
@@ -96,8 +92,8 @@ export const TodoPageContainer: React.FC = () => {
   );
 
   useEffect(() => {
-    filterTodos(currentFilter);
-  }, [todos, currentFilter, filterTodos]);
+    filterTodos(filter);
+  }, [todos, filter, filterTodos]);
 
   const editTodo = async (todo: IPureTodo) => {
     const { id } = initialValue;
@@ -106,39 +102,28 @@ export const TodoPageContainer: React.FC = () => {
       ...currTodo,
       ...todo,
     };
-    await axios.patch('http://localhost:4000/api/', {
-      ...editedTodo,
-    });
-    setTodos(
-      todos.map((todo) => {
-        return todo.id === id
-          ? {
-              ...todo,
-              title: editedTodo.title,
-              description: editedTodo.description,
-            }
-          : todo;
-      })
-    );
-    setVisibleModal((prev) => !prev);
+
+    updateTodoActionCreator(editedTodo);
+
+    setVisible(false);
   };
 
   const handleSubmit = (data: IPureTodo) =>
-    modalType === 'create' ? addTodo(data) : editTodo(data);
+    type === 'create' ? addTodo(data) : editTodo(data);
 
   return (
     <TodoPage
       todos={filteredTodos.slice(-5)}
       deleteTodo={deleteTodo}
-      visibleModal={visibleModal}
+      visibleModal={isVisible}
       handleVisibleModal={handleVisibleModal}
       handleSubmit={handleSubmit}
       hasTodo={hasTodo}
       filterTodos={filterTodos}
       availiableOptions={availiableOptions}
       handleTodoProgress={handleTodoProgress}
-      currentFilter={currentFilter}
-      modalType={modalType}
+      currentFilter={filter}
+      modalType={type}
       initialValue={initialValue}
     />
   );
