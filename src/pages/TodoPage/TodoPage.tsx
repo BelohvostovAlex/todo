@@ -4,7 +4,8 @@ import { ButtonTypes } from '../../components/Button/interfaces';
 import { EmptyBlock } from '../../components/EmptyBlock/EmptyBlock';
 import { ModalContainer } from '../../components/Modal';
 import { PageHeader } from '../../components/PageHeader';
-import { Todo } from '../../components/Todo';
+
+import { TodoContainer } from '../../components/Todo/TodoContainer';
 import { TodoPageProps } from './interfaces';
 
 import './todoPage.scss';
@@ -29,15 +30,13 @@ export const TodoPage: React.FC<TodoPageProps> = ({
           <div className="todo-page__wrapper">
             {todos.map(({ id, title, description }) => {
               return (
-                <Todo
+                <TodoContainer
                   key={id}
                   title={title}
                   description={description}
                   id={id}
                   deleteTodo={() => deleteTodo(id)}
-                  handleVisibleModalWithEditFeature={() =>
-                    handleVisibleModal(id)
-                  }
+                  handleVisibleModal={() => handleVisibleModal(id)}
                 />
               );
             })}

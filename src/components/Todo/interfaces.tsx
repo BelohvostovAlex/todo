@@ -1,7 +1,21 @@
+import React from 'react';
+
 export interface TodoProps {
   id: string;
   title: string;
   description: string;
   deleteTodo: () => void;
-  handleVisibleModalWithEditFeature: () => void;
+  availiableOptions: string[];
+  selectedOption: string;
+  handleOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  classes: string;
+  handleVisibleModal: () => void;
+}
+
+export interface TodoContainerProps {
+  id: string;
+  title: string;
+  description: string;
+  deleteTodo: (id: string) => void;
+  handleVisibleModal: () => void;
 }
