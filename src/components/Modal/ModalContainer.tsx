@@ -6,11 +6,16 @@ import { Modal } from './Modal';
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
+  availiableOptions,
   onSubmit,
   modalType,
   initialValue,
 }) => {
-  const { title: initialTitle, description: initialDescription } = initialValue;
+  const {
+    title: initialTitle,
+    description: initialDescription,
+    status,
+  } = initialValue;
 
   const [title, handleTitle] = useInput(initialTitle);
   const [description, handleDescription] = useInput(initialDescription);
@@ -19,6 +24,7 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
     onSubmit({
       title,
       description,
+      status,
     });
   };
 

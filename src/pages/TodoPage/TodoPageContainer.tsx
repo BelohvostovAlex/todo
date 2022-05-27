@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { TodoPage } from './TodoPage';
 import { ITodo, IPureTodo } from '../../models/ITodo';
 import { v4 } from 'uuid';
 
+const availiableOptions = ['Todo', 'In progress', 'Done'];
+
 const defaultValue = {
   id: '',
   title: '',
   description: '',
+  status: '',
 };
 
 export const TodoPageContainer: React.FC = () => {
   const [todos, setTodos] = useState([] as ITodo[]);
+  const [filteredTodos, setFilteredTodos] = useState([] as ITodo[]);
+  const [currentFilter, setCurrentFilter] = useState('All');
   const [modalType, setModalType] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
   const [initialValue, setInitialValue] = useState(defaultValue as ITodo);
 
-  const hasTodo = !!todos.length;
+  const hasTodo = !!filteredTodos.length;
 
   const addTodo = (todo: IPureTodo) => {
     setTodos([...todos, { ...todo, id: v4() }]);
@@ -33,6 +38,7 @@ export const TodoPageContainer: React.FC = () => {
       id: '',
       title: '',
       description: '',
+      status: availiableOptions[0],
     };
 
     setVisibleModal((prev) => !prev);
@@ -45,6 +51,26 @@ export const TodoPageContainer: React.FC = () => {
 
     setInitialValue(defaultValue);
   };
+
+  const handleTodoProgress = (id: string, status: string) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, status: status } : todo))
+    );
+  };
+
+  const filterTodos = useCallback(
+    (title: string) => {
+      setCurrentFilter(title);
+      if (title === 'All') return setFilteredTodos(todos);
+
+      return setFilteredTodos(todos.filter((todo) => todo.status === title));
+    },
+    [todos]
+  );
+
+  useEffect(() => {
+    filterTodos(currentFilter);
+  }, [todos, currentFilter, filterTodos]);
 
   const editTodo = (todo: IPureTodo) => {
     const { id } = initialValue;
@@ -72,12 +98,16 @@ export const TodoPageContainer: React.FC = () => {
 
   return (
     <TodoPage
-      todos={todos.slice(-5)}
+      todos={filteredTodos.slice(-5)}
       deleteTodo={deleteTodo}
       visibleModal={visibleModal}
       handleVisibleModal={handleVisibleModal}
       handleSubmit={handleSubmit}
       hasTodo={hasTodo}
+      filterTodos={filterTodos}
+      availiableOptions={availiableOptions}
+      handleTodoProgress={handleTodoProgress}
+      currentFilter={currentFilter}
       modalType={modalType}
       initialValue={initialValue}
     />

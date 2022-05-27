@@ -1,0 +1,13 @@
+.filter-item {
+  padding: 5px 20px;
+  border: 1px solid black;
+  min-width: 100px;
+  max-width: 180px;
+  text-align: center;
+  background-color: rgb(164, 164, 164);
+  cursor: pointer;
+
+  &--active {
+    background-color: rgb(104, 169, 234);
+  }
+}
