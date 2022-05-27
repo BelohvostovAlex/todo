@@ -1,10 +1,15 @@
-import { ITodo } from '../../models/ITodo';
+import { IPureTodo, ITodo } from '../../models/ITodo';
 
 export interface TodoPageProps {
   todos: ITodo[];
-  addTodo: (todo: ITodo) => void;
+  handleSubmit: (todo: IPureTodo) => void;
   deleteTodo: (id: string) => void;
   visibleModal: boolean;
-  handleVisibleModal: () => void;
+  handleVisibleModal: (id?: string) => void;
   hasTodo: boolean;
+  modalType: string;
+  initialValue: {
+    title: string;
+    description: string;
+  };
 }

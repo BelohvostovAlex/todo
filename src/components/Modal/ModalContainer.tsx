@@ -1,5 +1,4 @@
 import React from 'react';
-import { v4 } from 'uuid';
 
 import { useInput } from '../../hooks/useInput';
 import { ModalContainerProps } from './interfaces';
@@ -7,16 +6,22 @@ import { Modal } from './Modal';
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
-  addTodo,
+  onSubmit,
+  modalType,
+  initialValue,
 }) => {
-  const [title, handleTitle] = useInput();
-  const [description, handleDescription] = useInput();
+  const { title: initialTitle, description: initialDescription } = initialValue;
 
-  const createTodo = () => {
-    addTodo({ id: v4(), title: title, description: description });
+  const [title, handleTitle] = useInput(initialTitle);
+  const [description, handleDescription] = useInput(initialDescription);
 
-    onClose();
+  const handleSubmit = () => {
+    onSubmit({
+      title,
+      description,
+    });
   };
+
   return (
     <Modal
       title={title}
@@ -24,7 +29,8 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       description={description}
       handleDescription={handleDescription}
       onClose={onClose}
-      createTodo={createTodo}
+      onSubmit={handleSubmit}
+      type={modalType}
     />
   );
 };
