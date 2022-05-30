@@ -1,11 +1,13 @@
 import React from 'react';
 import { TodoSelectProps } from './interfaces';
+import { availiableOptionsEnum } from '../../models/enums';
 
 const availiableOptionsObj: Record<string, string> = {
-  todo: 'Todo',
-  in_progress: 'In progress',
-  done: 'Done',
+  todo: availiableOptionsEnum.todo,
+  in_progress: availiableOptionsEnum.in_progress,
+  done: availiableOptionsEnum.done,
 };
+console.log(availiableOptionsObj);
 
 export const TodoSelect: React.FC<TodoSelectProps> = ({
   availiableOptions,

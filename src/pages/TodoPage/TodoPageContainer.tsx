@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 
 import { TodoPage } from './TodoPage';
 import { ITodo, IPureTodo } from '../../models/ITodo';
+import { useFetchData } from '../../hooks/useFetchData';
+import WebService from '../../services/WebService';
+import { availiableOptionsEnum } from '../../models/enums';
 
 const todoOptionsBackend: Record<string, string> = {
-  Todo: 'todo',
-  'In progress': 'in_progress',
-  Done: 'done',
+  [availiableOptionsEnum.todo]: 'todo',
+  [availiableOptionsEnum.in_progress]: 'in_progress',
+  [availiableOptionsEnum.done]: 'done',
 };
 
 const availiableOptions = ['todo', 'in_progress', 'done'];
+const { REACT_APP_SERVER_URL } = process.env;
 
 const defaultValue = {
   id: '',
@@ -26,29 +29,23 @@ export const TodoPageContainer: React.FC = () => {
   const [modalType, setModalType] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
   const [initialValue, setInitialValue] = useState(defaultValue as ITodo);
-
-  const fetchData = async (url: string) => {
-    const { data } = await axios.get<ITodo[]>(url);
-    setTodos(data);
-  };
+  const { data } = useFetchData(REACT_APP_SERVER_URL!);
 
   useEffect(() => {
-    fetchData('http://localhost:4000/api');
-  }, []);
+    setTodos(data);
+  }, [data]);
 
   const hasTodo = !!filteredTodos.length;
 
   const addTodo = async (todo: IPureTodo) => {
-    const { data } = await axios.post('http://localhost:4000/api/', todo);
+    const data = await WebService.postData(todo);
     setTodos([...todos, data]);
     handleVisibleModal();
   };
 
   const deleteTodo = async (id: string) => {
     const currentTodo = todos.find((todo) => todo.id === id);
-    await axios.delete<ITodo>('http://localhost:4000/api/', {
-      data: { ...currentTodo },
-    });
+    WebService.deleteData(currentTodo!);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -77,10 +74,7 @@ export const TodoPageContainer: React.FC = () => {
       todos.map((todo) => (todo.id === id ? { ...todo, status: status } : todo))
     );
     const currentTodo = todos.find((todo) => todo.id === id);
-    await axios.patch('http://localhost:4000/api/', {
-      ...currentTodo,
-      status: status,
-    });
+    WebService.updateData({ ...currentTodo!, status: status });
   };
 
   const filterTodos = useCallback(
@@ -103,12 +97,10 @@ export const TodoPageContainer: React.FC = () => {
     const { id } = initialValue;
     const currTodo = todos.find((todo) => todo.id === id);
     const editedTodo = {
-      ...currTodo,
+      ...currTodo!,
       ...todo,
     };
-    await axios.patch('http://localhost:4000/api/', {
-      ...editedTodo,
-    });
+    WebService.updateData(editedTodo!);
     setTodos(
       todos.map((todo) => {
         return todo.id === id
