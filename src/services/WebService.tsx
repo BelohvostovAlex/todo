@@ -4,6 +4,11 @@ import { IPureTodo, ITodo } from '../models/ITodo';
 const { REACT_APP_SERVER_URL } = process.env;
 
 class WebService {
+  async getData() {
+    const { data } = await axios.get<ITodo>(REACT_APP_SERVER_URL!);
+    return data;
+  }
+
   async postData(value: IPureTodo) {
     const { data } = await axios.post<ITodo>(REACT_APP_SERVER_URL!, value);
     return data;
