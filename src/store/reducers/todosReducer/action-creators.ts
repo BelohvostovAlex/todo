@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { AppDispatch } from '../..';
 import { IPureTodo, ITodo } from '../../../models/ITodo';
+import WebService from '../../../services/WebService';
 import {
   TodosActionEnum,
   SetTodosActionTodos,
@@ -19,7 +19,7 @@ export const TodosActionCreators = {
   }),
   fetchTodos: () => async (dispatch: AppDispatch) => {
     try {
-      const { data } = await axios.get('http://localhost:4000/api');
+      const data = await WebService.getData()
       dispatch(TodosActionCreators.setTodos(data));
     } catch (error) {
       dispatch(TodosActionCreators.setError('Error, cant fetch the data...'));
@@ -39,10 +39,7 @@ export const TodosActionCreators = {
   }),
   addTodoActionCreator: (todo: IPureTodo) => async (dispatch: AppDispatch) => {
     try {
-      const { data } = await axios.post<ITodo>(
-        'http://localhost:4000/api',
-        todo
-      );
+      const data = await WebService.postData(todo)
       dispatch(TodosActionCreators.addTodo(data));
     } catch (error) {
       dispatch(TodosActionCreators.setError('Error, cant create a todo...'));
@@ -54,9 +51,7 @@ export const TodosActionCreators = {
   }),
   deleteTodoActionCreator: (todo: ITodo) => async (dispatch: AppDispatch) => {
     try {
-      await axios.delete<ITodo>('http://localhost:4000/api/', {
-        data: { ...todo },
-      });
+      await WebService.deleteData(todo)
       dispatch(TodosActionCreators.deleteTodo(todo.id));
     } catch (error) {
       dispatch(TodosActionCreators.setError('Error, can`t delete the todo...'));
@@ -75,10 +70,8 @@ export const TodosActionCreators = {
     }) =>
     async (dispatch: AppDispatch) => {
       try {
-        const { data } = await axios.patch('http://localhost:4000/api/', {
-          ...payload,
-        });
-        dispatch(TodosActionCreators.updateTodo(data));
+        const data = await WebService.updateData(payload)
+        dispatch(TodosActionCreators.updateTodo(data!));
       } catch (error) {
         dispatch(
           TodosActionCreators.setError('Error, can`t update the todo...')
@@ -98,9 +91,7 @@ export const TodosActionCreators = {
     }) =>
     async (dispatch: AppDispatch) => {
       try {
-        const { data } = await axios.patch('http://localhost:4000/api/', {
-          ...payload,
-        });
+        const data = await WebService.updateData(payload)
         dispatch(TodosActionCreators.updateTodoStatus(data));
       } catch (error) {
         dispatch(
