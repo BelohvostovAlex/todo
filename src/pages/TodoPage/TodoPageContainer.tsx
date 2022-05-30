@@ -4,11 +4,12 @@ import { TodoPage } from './TodoPage';
 import { ITodo, IPureTodo } from '../../models/ITodo';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
+import { availiableOptionsEnum } from '../../models/enums';
 
 const todoOptionsBackend: Record<string, string> = {
-  Todo: 'todo',
-  'In progress': 'in_progress',
-  Done: 'done',
+  [availiableOptionsEnum.todo]: 'todo',
+  [availiableOptionsEnum.in_progress]: 'in_progress',
+  [availiableOptionsEnum.done]: 'done',
 };
 
 const availiableOptions = ['todo', 'in_progress', 'done'];
@@ -99,7 +100,7 @@ export const TodoPageContainer: React.FC = () => {
     const { id } = initialValue;
     const currTodo = todos.find((todo) => todo.id === id);
     const editedTodo = {
-      ...currTodo,
+      ...currTodo!,
       ...todo,
     };
 
