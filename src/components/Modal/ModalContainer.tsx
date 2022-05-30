@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useInput } from '../../hooks/useInput';
+import { useModalForm } from '../../hooks/useModalForm';
 import { ModalContainerProps } from './interfaces';
 import { Modal } from './Modal';
 
@@ -10,10 +10,8 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   modalType,
   initialValue,
 }) => {
-  const { title: initialTitle, description: initialDescription } = initialValue;
-
-  const [title, handleTitle] = useInput(initialTitle);
-  const [description, handleDescription] = useInput(initialDescription);
+  const [title, description, handleTitle, handleDescription] =
+    useModalForm(initialValue);
 
   const handleSubmit = () => {
     onSubmit({

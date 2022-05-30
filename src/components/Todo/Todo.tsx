@@ -16,9 +16,10 @@ export const Todo: React.FC<TodoProps> = ({
   handleOption,
   classes,
   handleVisibleModal,
+  handleSingleTodoPage,
 }) => {
   return (
-    <div className="todo">
+    <div className="todo" onDoubleClick={handleSingleTodoPage}>
       <div className="todo-text">
         <h2 className="todo-text__title">{title}</h2>
         <h3 className="todo-text__descr">{description}</h3>

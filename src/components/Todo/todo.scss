@@ -55,6 +55,11 @@
   &--orange {
     background-color: rgb(232, 171, 58);
   }
+
+  &--big {
+    height: 50px;
+    width: 200px;
+  }
 }
 
 .todo-right-part {

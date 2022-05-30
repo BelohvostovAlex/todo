@@ -1,10 +1,10 @@
 import React from 'react';
-import { TodoPageContainer } from './pages/TodoPage';
+import { AppRouter } from './components/AppRouter/AppRouter';
 
 export const App: React.FC = () => {
   return (
     <div>
-      <TodoPageContainer />
+      <AppRouter />
     </div>
   );
 };

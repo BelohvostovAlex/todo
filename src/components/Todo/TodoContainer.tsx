@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 import { Todo } from './Todo';
 import { TodoContainerProps } from './interfaces';
+import { useOptions } from '../../hooks/useOptions';
 
 export const TodoContainer: React.FC<TodoContainerProps> = ({
   id,
@@ -10,24 +12,23 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   description,
   deleteTodo,
   availiableOptions,
-  handleTodoProgress,
   todos,
   handleVisibleModal,
 }) => {
   const currentTodo = todos.find((todo) => todo.id === id);
-  const [selectedOption, setSelectedOption] = useState(currentTodo!.status);
+  const navigate = useNavigate();
 
-  const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(e.target.value);
-
-    handleTodoProgress(id, e.target.value);
-  };
+  const [selectedOption, handleOption] = useOptions(currentTodo!, id!);
 
   const classes = classNames('todo-select', {
     'todo-select--blue': selectedOption === 'todo',
     'todo-select--green': selectedOption === 'in_progress',
     'todo-select--orange': selectedOption === 'done',
   });
+
+  const handleSingleTodoPage = () => {
+    navigate(`/todos/${id}`);
+  };
   return (
     <Todo
       id={id}
@@ -39,6 +40,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
       handleOption={handleOption}
       classes={classes}
       handleVisibleModal={handleVisibleModal}
+      handleSingleTodoPage={handleSingleTodoPage}
     />
   );
 };
