@@ -2,9 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import { TodoPage } from './TodoPage';
 import { ITodo, IPureTodo } from '../../models/ITodo';
-import { v4 } from 'uuid';
+import { useFetchData } from '../../hooks/useFetchData';
+import WebService from '../../services/WebService';
+import { availiableOptionsEnum } from '../../models/enums';
 
-const availiableOptions = ['Todo', 'In progress', 'Done'];
+const todoOptionsBackend: Record<string, string> = {
+  [availiableOptionsEnum.todo]: 'todo',
+  [availiableOptionsEnum.in_progress]: 'in_progress',
+  [availiableOptionsEnum.done]: 'done',
+};
+
+const { REACT_APP_SERVER_URL } = process.env;
 
 const defaultValue = {
   id: '',
@@ -20,15 +28,24 @@ export const TodoPageContainer: React.FC = () => {
   const [modalType, setModalType] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
   const [initialValue, setInitialValue] = useState(defaultValue as ITodo);
+  const { data } = useFetchData(REACT_APP_SERVER_URL!);
+  const webService = new WebService();
+
+  useEffect(() => {
+    setTodos(data);
+  }, [data]);
 
   const hasTodo = !!filteredTodos.length;
 
-  const addTodo = (todo: IPureTodo) => {
-    setTodos([...todos, { ...todo, id: v4() }]);
+  const addTodo = async (todo: IPureTodo) => {
+    const data = await webService.postData(todo);
+    setTodos([...todos, data]);
     handleVisibleModal();
   };
 
-  const deleteTodo = (id: string) => {
+  const deleteTodo = async (id: string) => {
+    const currentTodo = todos.find((todo) => todo.id === id);
+    await webService.deleteData(currentTodo!);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -38,7 +55,7 @@ export const TodoPageContainer: React.FC = () => {
       id: '',
       title: '',
       description: '',
-      status: availiableOptions[0],
+      status: '',
     };
 
     setVisibleModal((prev) => !prev);
@@ -52,10 +69,12 @@ export const TodoPageContainer: React.FC = () => {
     setInitialValue(defaultValue);
   };
 
-  const handleTodoProgress = (id: string, status: string) => {
+  const handleTodoProgress = async (id: string, status: string) => {
     setTodos(
       todos.map((todo) => (todo.id === id ? { ...todo, status: status } : todo))
     );
+    const currentTodo = todos.find((todo) => todo.id === id);
+    await webService.updateData({ ...currentTodo!, status: status });
   };
 
   const filterTodos = useCallback(
@@ -63,7 +82,9 @@ export const TodoPageContainer: React.FC = () => {
       setCurrentFilter(title);
       if (title === 'All') return setFilteredTodos(todos);
 
-      return setFilteredTodos(todos.filter((todo) => todo.status === title));
+      return setFilteredTodos(
+        todos.filter((todo) => todo.status === todoOptionsBackend[title])
+      );
     },
     [todos]
   );
@@ -72,13 +93,16 @@ export const TodoPageContainer: React.FC = () => {
     filterTodos(currentFilter);
   }, [todos, currentFilter, filterTodos]);
 
-  const editTodo = (todo: IPureTodo) => {
+  const editTodo = async (todo: IPureTodo) => {
     const { id } = initialValue;
     const currTodo = todos.find((todo) => todo.id === id);
     const editedTodo = {
-      ...currTodo,
+      ...currTodo!,
       ...todo,
     };
+
+    await webService.updateData(editedTodo!);
+
     setTodos(
       todos.map((todo) => {
         return todo.id === id
@@ -105,7 +129,6 @@ export const TodoPageContainer: React.FC = () => {
       handleSubmit={handleSubmit}
       hasTodo={hasTodo}
       filterTodos={filterTodos}
-      availiableOptions={availiableOptions}
       handleTodoProgress={handleTodoProgress}
       currentFilter={currentFilter}
       modalType={modalType}

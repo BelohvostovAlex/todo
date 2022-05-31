@@ -5,8 +5,8 @@ import { ButtonProps, ButtonTypes } from './interfaces';
 
 export const Button: React.FC<ButtonProps> = ({
   text,
-  className,
   type = ButtonTypes.BUTTON,
+  className,
   onClick,
 }) => {
   return (

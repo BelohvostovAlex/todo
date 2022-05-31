@@ -9,7 +9,6 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   title,
   description,
   deleteTodo,
-  availiableOptions,
   handleTodoProgress,
   todos,
   handleVisibleModal,
@@ -24,9 +23,9 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   };
 
   const classes = classNames('todo-select', {
-    'todo-select--blue': selectedOption === 'Todo',
-    'todo-select--green': selectedOption === 'In progress',
-    'todo-select--orange': selectedOption === 'Done',
+    'todo-select--blue': selectedOption === 'todo',
+    'todo-select--green': selectedOption === 'in_progress',
+    'todo-select--orange': selectedOption === 'done',
   });
   return (
     <Todo
@@ -34,7 +33,6 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
       title={title}
       description={description}
       deleteTodo={() => deleteTodo(id)}
-      availiableOptions={availiableOptions}
       selectedOption={selectedOption}
       handleOption={handleOption}
       classes={classes}

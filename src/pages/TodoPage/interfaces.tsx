@@ -1,4 +1,4 @@
-import { IPureTodo, ITodo } from '../../models/ITodo';
+import { ITodo, IPureTodo } from '../../models/ITodo';
 
 export interface TodoPageProps {
   todos: ITodo[];
@@ -8,7 +8,6 @@ export interface TodoPageProps {
   handleVisibleModal: (id?: string) => void;
   hasTodo: boolean;
   filterTodos: (title: string) => void;
-  availiableOptions: string[];
   handleTodoProgress: (id: string, progress: string) => void;
   currentFilter: string;
   modalType: string;
