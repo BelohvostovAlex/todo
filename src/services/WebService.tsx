@@ -3,12 +3,7 @@ import { IPureTodo, ITodo } from '../models/ITodo';
 
 const { REACT_APP_SERVER_URL } = process.env;
 
-class WebService {
-  async getData() {
-    const { data } = await axios.get<ITodo>(REACT_APP_SERVER_URL!);
-    return data;
-  }
-
+export default class WebService {
   async postData(value: IPureTodo) {
     const { data } = await axios.post<ITodo>(REACT_APP_SERVER_URL!, value);
     return data;
@@ -25,5 +20,3 @@ class WebService {
     await axios.patch(REACT_APP_SERVER_URL!, value);
   }
 }
-
-export default new WebService();

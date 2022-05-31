@@ -18,7 +18,6 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   handleVisibleModal,
   hasTodo,
   filterTodos,
-  availiableOptions,
   handleTodoProgress,
   currentFilter,
   modalType,
@@ -47,7 +46,6 @@ export const TodoPage: React.FC<TodoPageProps> = ({
                   status={status}
                   todos={todos}
                   deleteTodo={() => deleteTodo(id)}
-                  availiableOptions={availiableOptions}
                   handleTodoProgress={handleTodoProgress}
                   handleVisibleModal={() => handleVisibleModal(id)}
                 />

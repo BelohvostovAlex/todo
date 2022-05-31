@@ -7,10 +7,10 @@ const availiableOptionsObj: Record<string, string> = {
   in_progress: availiableOptionsEnum.in_progress,
   done: availiableOptionsEnum.done,
 };
-console.log(availiableOptionsObj);
+
+const availiableOptions = ['todo', 'in_progress', 'done'];
 
 export const TodoSelect: React.FC<TodoSelectProps> = ({
-  availiableOptions,
   selectedOption,
   handleOption,
   classes,

@@ -12,7 +12,6 @@ const todoOptionsBackend: Record<string, string> = {
   [availiableOptionsEnum.done]: 'done',
 };
 
-const availiableOptions = ['todo', 'in_progress', 'done'];
 const { REACT_APP_SERVER_URL } = process.env;
 
 const defaultValue = {
@@ -30,6 +29,7 @@ export const TodoPageContainer: React.FC = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [initialValue, setInitialValue] = useState(defaultValue as ITodo);
   const { data } = useFetchData(REACT_APP_SERVER_URL!);
+  const webService = new WebService();
 
   useEffect(() => {
     setTodos(data);
@@ -38,14 +38,14 @@ export const TodoPageContainer: React.FC = () => {
   const hasTodo = !!filteredTodos.length;
 
   const addTodo = async (todo: IPureTodo) => {
-    const data = await WebService.postData(todo);
+    const data = await webService.postData(todo);
     setTodos([...todos, data]);
     handleVisibleModal();
   };
 
   const deleteTodo = async (id: string) => {
     const currentTodo = todos.find((todo) => todo.id === id);
-    WebService.deleteData(currentTodo!);
+    await webService.deleteData(currentTodo!);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -74,7 +74,7 @@ export const TodoPageContainer: React.FC = () => {
       todos.map((todo) => (todo.id === id ? { ...todo, status: status } : todo))
     );
     const currentTodo = todos.find((todo) => todo.id === id);
-    WebService.updateData({ ...currentTodo!, status: status });
+    await webService.updateData({ ...currentTodo!, status: status });
   };
 
   const filterTodos = useCallback(
@@ -100,7 +100,9 @@ export const TodoPageContainer: React.FC = () => {
       ...currTodo!,
       ...todo,
     };
-    WebService.updateData(editedTodo!);
+
+    await webService.updateData(editedTodo!);
+
     setTodos(
       todos.map((todo) => {
         return todo.id === id
@@ -127,7 +129,6 @@ export const TodoPageContainer: React.FC = () => {
       handleSubmit={handleSubmit}
       hasTodo={hasTodo}
       filterTodos={filterTodos}
-      availiableOptions={availiableOptions}
       handleTodoProgress={handleTodoProgress}
       currentFilter={currentFilter}
       modalType={modalType}
