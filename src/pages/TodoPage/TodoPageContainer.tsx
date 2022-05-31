@@ -13,8 +13,6 @@ const todoOptionsBackend: Record<string, string> = {
   [availiableOptionsEnum.done]: 'done',
 };
 
-const availiableOptions = ['todo', 'in_progress', 'done'];
-
 export const TodoPageContainer: React.FC = () => {
   const [filteredTodos, setFilteredTodos] = useState([] as ITodo[]);
   const { isVisible, type } = useTypedSelector((state) => state.modalReducer);
@@ -63,7 +61,6 @@ export const TodoPageContainer: React.FC = () => {
       handleSubmit={handleSubmit}
       hasTodo={hasTodo}
       filterTodos={filterTodos}
-      availiableOptions={availiableOptions}
       handleTodoProgress={handleTodoProgress}
       currentFilter={filter}
       modalType={type}

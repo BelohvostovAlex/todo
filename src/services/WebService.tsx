@@ -3,7 +3,7 @@ import { IPureTodo, ITodo } from '../models/ITodo';
 
 const { REACT_APP_SERVER_URL } = process.env;
 
-class WebService {
+export class WebService {
   async getData() {
     const { data } = await axios.get<ITodo[]>(REACT_APP_SERVER_URL!);
     return data;
@@ -21,25 +21,8 @@ class WebService {
     return data;
   }
 
-  async updateData(
-    value:
-      | ITodo
-      | {
-          id?: string | undefined;
-          status?: string | undefined;
-          title: string;
-          description: string;
-        }
-      | {
-          status: string;
-          id?: string | undefined;
-          title?: string | undefined;
-          description?: string | undefined;
-        }
-  ) {
+  async updateData(value: ITodo) {
     const { data } = await axios.patch(REACT_APP_SERVER_URL!, value);
     return data;
   }
 }
-
-export default new WebService();

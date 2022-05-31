@@ -14,18 +14,23 @@ export const todosReducer = (
   switch (action.type) {
     case TodosActionEnum.SET_TODOS:
       return { ...state, isError: '', todos: action.payload };
+
     case TodosActionEnum.SET_FILTER:
       return { ...state, isError: '', filter: action.payload };
+
     case TodosActionEnum.SET_ERROR:
       return { ...state, isError: action.payload };
+
     case TodosActionEnum.ADD_TODO:
       return { ...state, isError: '', todos: [...state.todos, action.payload] };
+
     case TodosActionEnum.DELETE_TODO:
       return {
         ...state,
         isError: '',
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
+
     case TodosActionEnum.UPDATE_TODO:
       return {
         ...state,
@@ -40,6 +45,7 @@ export const todosReducer = (
             : todo;
         }),
       };
+
     case TodosActionEnum.UPDATE_TODO_STATUS:
       return {
         ...state,
@@ -53,6 +59,7 @@ export const todosReducer = (
             : todo;
         }),
       };
+      
     default:
       return state;
   }
