@@ -25,22 +25,22 @@ export const useHandlers = () => {
   const [initialValue, setInitialValue] = useState(defaultValue as ITodo);
 
   return {
-    addTodo: async (todo: IPureTodo) => {
+    addTodo: (todo: IPureTodo) => {
       addTodoActionCreator(todo);
       setVisible(false);
     },
 
-    deleteTodo: async (id: string) => {
+    deleteTodo: (id: string) => {
       const currentTodo = todos.find((todo) => todo.id === id);
       deleteTodoActionCreator(currentTodo!);
     },
 
-    handleTodoProgress: async (id: string, status: string) => {
+    handleTodoProgress: (id: string, status: string) => {
       const currentTodo = todos.find((todo) => todo.id === id);
-      updateTodoStatusActionCreator({ ...currentTodo, status: status });
+      updateTodoStatusActionCreator({ ...currentTodo!, status: status });
     },
 
-    editTodo: async (todo: IPureTodo) => {
+    editTodo: (todo: IPureTodo) => {
       const { id } = initialValue;
       const currTodo = todos.find((todo) => todo.id === id);
       const editedTodo = {

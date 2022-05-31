@@ -38,12 +38,7 @@ export interface DeleteTodoActionTodos {
 
 export interface UpdateTodoActionTodos {
   type: TodosActionEnum.UPDATE_TODO;
-  payload: {
-    id?: string | undefined;
-    status?: string | undefined;
-    title: string;
-    description: string;
-  };
+  payload: ITodo;
 }
 
 export interface UpdateTodoStatusActionTodos {

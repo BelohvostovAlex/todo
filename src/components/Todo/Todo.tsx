@@ -11,7 +11,6 @@ export const Todo: React.FC<TodoProps> = ({
   title,
   description,
   deleteTodo,
-  availiableOptions,
   selectedOption,
   handleOption,
   classes,
@@ -26,7 +25,6 @@ export const Todo: React.FC<TodoProps> = ({
       </div>
       <div className="todo-right-part">
         <TodoSelect
-          availiableOptions={availiableOptions}
           selectedOption={selectedOption}
           handleOption={handleOption}
           classes={classes}

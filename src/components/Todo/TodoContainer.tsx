@@ -11,7 +11,11 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   title,
   description,
   deleteTodo,
+<<<<<<< HEAD
   availiableOptions,
+=======
+  handleTodoProgress,
+>>>>>>> 090cb363cb99deb85dae0c330038ac9400b0f53e
   todos,
   handleVisibleModal,
 }) => {
@@ -35,7 +39,6 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
       title={title}
       description={description}
       deleteTodo={() => deleteTodo(id)}
-      availiableOptions={availiableOptions}
       selectedOption={selectedOption}
       handleOption={handleOption}
       classes={classes}

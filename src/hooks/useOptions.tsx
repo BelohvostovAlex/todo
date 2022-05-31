@@ -10,9 +10,10 @@ export const useOptions = (
   const [selectedOption, setSelectedOption] = useState(initialValue.status);
 
   const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(e.target.value);
+    const { value } = e.target;
+    setSelectedOption(value);
 
-    handleTodoProgress(id!, e.target.value);
+    handleTodoProgress(id!, value);
   };
   return [selectedOption, handleOption];
 };
