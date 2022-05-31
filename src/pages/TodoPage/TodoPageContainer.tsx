@@ -18,14 +18,8 @@ export const TodoPageContainer: React.FC = () => {
   const { isVisible, type } = useTypedSelector((state) => state.modalReducer);
   const { todos, filter } = useTypedSelector((state) => state.todosReducer);
   const { fetchTodos, setFilter } = useActions();
-  const {
-    addTodo,
-    deleteTodo,
-    editTodo,
-    handleTodoProgress,
-    handleVisibleModal,
-    initialValue,
-  } = useHandlers();
+  const { addTodo, deleteTodo, editTodo, handleVisibleModal, initialValue } =
+    useHandlers();
 
   useEffect(() => {
     fetchTodos();
@@ -61,9 +55,7 @@ export const TodoPageContainer: React.FC = () => {
       handleSubmit={handleSubmit}
       hasTodo={hasTodo}
       filterTodos={filterTodos}
-      handleTodoProgress={handleTodoProgress}
       currentFilter={filter}
-      modalType={type}
       initialValue={initialValue}
     />
   );

@@ -1,21 +1,16 @@
 import React from 'react';
-import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
 import { Todo } from './Todo';
 import { TodoContainerProps } from './interfaces';
 import { useOptions } from '../../hooks/useOptions';
+import { createTodoSelectClasses } from './classesHelper';
 
 export const TodoContainer: React.FC<TodoContainerProps> = ({
   id,
   title,
   description,
   deleteTodo,
-<<<<<<< HEAD
-  availiableOptions,
-=======
-  handleTodoProgress,
->>>>>>> 090cb363cb99deb85dae0c330038ac9400b0f53e
   todos,
   handleVisibleModal,
 }) => {
@@ -23,12 +18,7 @@ export const TodoContainer: React.FC<TodoContainerProps> = ({
   const navigate = useNavigate();
 
   const [selectedOption, handleOption] = useOptions(currentTodo!, id!);
-
-  const classes = classNames('todo-select', {
-    'todo-select--blue': selectedOption === 'todo',
-    'todo-select--green': selectedOption === 'in_progress',
-    'todo-select--orange': selectedOption === 'done',
-  });
+  const classes = createTodoSelectClasses(selectedOption);
 
   const handleSingleTodoPage = () => {
     navigate(`/todos/${id}`);

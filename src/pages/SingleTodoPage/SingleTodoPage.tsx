@@ -12,10 +12,8 @@ export const SingleTodoPage: React.FC<SingleTodoPageProps> = ({
   title,
   description,
   visibleModal,
-  modalType,
   initialValue,
   handleSubmit,
-  availiableOptions,
   classes,
   handleOption,
   selectedOption,
@@ -33,7 +31,6 @@ export const SingleTodoPage: React.FC<SingleTodoPageProps> = ({
             <p className="single-todo__title-description">{description}</p>
             <div className="single-todo__buttons-wrapper">
               <TodoSelect
-                availiableOptions={availiableOptions}
                 classes={classes}
                 handleOption={handleOption}
                 selectedOption={selectedOption}
@@ -50,7 +47,6 @@ export const SingleTodoPage: React.FC<SingleTodoPageProps> = ({
       {visibleModal && (
         <ModalContainer
           onClose={handleVisibleModal}
-          modalType={modalType}
           initialValue={initialValue}
           onSubmit={handleSubmit}
         />

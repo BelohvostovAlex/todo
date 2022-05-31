@@ -19,7 +19,6 @@ export interface TodoContainerProps {
   description: string;
   status: string;
   deleteTodo: (id: string) => void;
-  handleTodoProgress: (id: string, progress: string) => void;
   todos: ITodo[];
   handleVisibleModal: () => void;
 }

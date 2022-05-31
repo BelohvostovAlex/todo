@@ -18,9 +18,7 @@ export const TodoPage: React.FC<TodoPageProps> = ({
   handleVisibleModal,
   hasTodo,
   filterTodos,
-  handleTodoProgress,
   currentFilter,
-  modalType,
   initialValue,
   handleSubmit,
 }) => {
@@ -46,7 +44,6 @@ export const TodoPage: React.FC<TodoPageProps> = ({
                   status={status}
                   todos={todos}
                   deleteTodo={() => deleteTodo(id)}
-                  handleTodoProgress={handleTodoProgress}
                   handleVisibleModal={() => handleVisibleModal(id)}
                 />
               );
@@ -64,7 +61,6 @@ export const TodoPage: React.FC<TodoPageProps> = ({
         {visibleModal && (
           <ModalContainer
             onClose={handleVisibleModal}
-            modalType={modalType}
             initialValue={initialValue}
             onSubmit={handleSubmit}
           />

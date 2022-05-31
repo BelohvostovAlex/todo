@@ -1,17 +1,19 @@
 import React from 'react';
 
 import { useModalForm } from '../../hooks/useModalForm';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { ModalContainerProps } from './interfaces';
 import { Modal } from './Modal';
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   onClose,
   onSubmit,
-  modalType,
   initialValue,
 }) => {
   const [title, description, handleTitle, handleDescription] =
     useModalForm(initialValue);
+
+  const { type } = useTypedSelector((state) => state.modalReducer);
 
   const handleSubmit = () => {
     onSubmit({
@@ -28,7 +30,7 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
       handleDescription={handleDescription}
       onClose={onClose}
       onSubmit={handleSubmit}
-      type={modalType}
+      type={type}
     />
   );
 };
