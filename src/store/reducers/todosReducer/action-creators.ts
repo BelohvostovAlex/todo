@@ -14,92 +14,107 @@ import {
 
 const webService = new WebService()
 
-export const TodosActionCreators = {
-  setTodos: (todos: ITodo[]): SetTodosActionTodos => ({
+
+  const setTodos = (todos: ITodo[]): SetTodosActionTodos => ({
     type: TodosActionEnum.SET_TODOS,
     payload: todos,
-  }),
+  })
 
-  fetchTodos: () => async (dispatch: AppDispatch) => {
+  const fetchTodos = () => async (dispatch: AppDispatch) => {
     try {
       const data = await webService.getData()
-      dispatch(TodosActionCreators.setTodos(data));
+      dispatch(setTodos(data));
     } catch (error) {
-      dispatch(TodosActionCreators.setError('Error, cant fetch the data...'));
+      dispatch(setError('Error, cant fetch the data...'));
     }
-  },
+  }
 
-  setFilter: (filter: string): SetFilterActionTodos => ({
+  const setFilter = (filter: string): SetFilterActionTodos => ({
     type: TodosActionEnum.SET_FILTER,
     payload: filter
-  }),
+  })
 
-  setError: (payload: string): SetErrorActionTodos => ({
+  const setError = (payload: string): SetErrorActionTodos => ({
     type: TodosActionEnum.SET_ERROR,
     payload,
-  }),
+  })
 
-  addTodo: (todo: ITodo): AddTodoActionTodos => ({
+  const addTodo = (todo: ITodo): AddTodoActionTodos => ({
     type: TodosActionEnum.ADD_TODO,
     payload: todo,
-  }),
+  })
 
-  addTodoActionCreator: (todo: IPureTodo) => async (dispatch: AppDispatch) => {
+  const addTodoActionCreator = (todo: IPureTodo) => async (dispatch: AppDispatch) => {
     try {
       const data = await webService.postData(todo)
-      dispatch(TodosActionCreators.addTodo(data));
+      dispatch(addTodo(data));
     } catch (error) {
-      dispatch(TodosActionCreators.setError('Error, cant create a todo...'));
+      dispatch(setError('Error, cant create a todo...'));
     }
-  },
+  }
 
-  deleteTodo: (id: string): DeleteTodoActionTodos => ({
+  const deleteTodo = (id: string): DeleteTodoActionTodos => ({
     type: TodosActionEnum.DELETE_TODO,
     payload: id,
-  }),
+  })
 
-  deleteTodoActionCreator: (todo: ITodo) => async (dispatch: AppDispatch) => {
+  const deleteTodoActionCreator = (todo: ITodo) => async (dispatch: AppDispatch) => {
     try {
       await webService.deleteData(todo)
-      dispatch(TodosActionCreators.deleteTodo(todo.id));
+      dispatch(deleteTodo(todo.id));
     } catch (error) {
-      dispatch(TodosActionCreators.setError('Error, can`t delete the todo...'));
+      dispatch(setError('Error, can`t delete the todo...'));
     }
-  },
+  }
 
-  updateTodo: (todo: ITodo): UpdateTodoActionTodos => ({
+  const updateTodo = (todo: ITodo): UpdateTodoActionTodos => ({
     type: TodosActionEnum.UPDATE_TODO,
     payload: todo,
-  }),
+  })
 
-  updateTodoActionCreator:
+  const updateTodoActionCreator =
     (payload: ITodo) =>
     async (dispatch: AppDispatch) => {
       try {
         const data = await webService.updateData(payload)
-        dispatch(TodosActionCreators.updateTodo(data!));
+        dispatch(updateTodo(data!));
       } catch (error) {
         dispatch(
-          TodosActionCreators.setError('Error, can`t update the todo...')
+          setError('Error, can`t update the todo...')
         );
       }
-    },
+    }
 
-  updateTodoStatus: (todo: ITodo): UpdateTodoStatusActionTodos => ({
+  const updateTodoStatus = (todo: ITodo): UpdateTodoStatusActionTodos => ({
     type: TodosActionEnum.UPDATE_TODO_STATUS,
     payload: todo,
-  }),
+  })
 
-  updateTodoStatusActionCreator:
+  const updateTodoStatusActionCreator =
     (payload: ITodo) =>
     async (dispatch: AppDispatch) => {
       try {
         const data = await webService.updateData(payload)
-        dispatch(TodosActionCreators.updateTodoStatus(data));
+        dispatch(updateTodoStatus(data));
       } catch (error) {
         dispatch(
-          TodosActionCreators.setError('Error, can`t update the todo status...')
+          setError('Error, can`t update the todo status...')
         );
       }
-    },
-};
+    }
+
+    export const todosActionCreators = {
+      setTodos,
+      fetchTodos,
+      setFilter,
+      setError,
+      addTodo,
+      addTodoActionCreator,
+      deleteTodo,
+      deleteTodoActionCreator,
+      updateTodo,
+      updateTodoActionCreator,
+      updateTodoStatus,
+      updateTodoStatusActionCreator
+    }
+
