@@ -1,5 +1,6 @@
 import { ITodo } from '../../../models/ITodo';
 import { ModalActionType, TodosActionEnum, TodosState } from './types';
+import produce from 'immer';
 
 const initialState: TodosState = {
   todos: [] as ITodo[],
@@ -13,53 +14,53 @@ export const todosReducer = (
 ): TodosState => {
   switch (action.type) {
     case TodosActionEnum.SET_TODOS:
-      return { ...state, isError: '', todos: action.payload };
+      return produce(state, (draftState) => {
+        draftState.isError = '';
+        draftState.todos = action.payload;
+      });
 
     case TodosActionEnum.SET_FILTER:
-      return { ...state, isError: '', filter: action.payload };
+      return produce(state, (draftState) => {
+        draftState.isError = '';
+        draftState.filter = action.payload;
+      });
 
     case TodosActionEnum.SET_ERROR:
-      return { ...state, isError: action.payload };
+      return produce(state, (draftState) => {
+        draftState.isError = action.payload;
+      });
 
     case TodosActionEnum.ADD_TODO:
-      return { ...state, isError: '', todos: [...state.todos, action.payload] };
+      return produce(state, (draftState) => {
+        draftState.isError = '';
+        draftState.todos.push(action.payload);
+      });
 
     case TodosActionEnum.DELETE_TODO:
-      return {
-        ...state,
-        isError: '',
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
-      };
+      return produce(state, (draftState) => {
+        draftState.isError = '';
+        draftState.todos.filter((todo) => todo.id !== action.payload);
+      });
 
     case TodosActionEnum.UPDATE_TODO:
-      return {
-        ...state,
-        isError: '',
-        todos: state.todos.map((todo) => {
-          return todo.id === action.payload.id
-            ? {
-                ...todo,
-                title: action.payload.title,
-                description: action.payload.description,
-              }
-            : todo;
-        }),
-      };
+      return produce(state, (draftState) => {
+        draftState.isError = '';
+        const todo = draftState.todos.find(
+          (item) => item.id === action.payload.id
+        );
+        todo!.title = action.payload.title;
+        todo!.description = action.payload.description;
+      });
 
     case TodosActionEnum.UPDATE_TODO_STATUS:
-      return {
-        ...state,
-        isError: '',
-        todos: state.todos.map((todo) => {
-          return todo.id === action.payload.id
-            ? {
-                ...todo,
-                status: action.payload.status,
-              }
-            : todo;
-        }),
-      };
-      
+      return produce(state, (draftState) => {
+        draftState.isError = '';
+        const todo = draftState.todos.find(
+          (item) => item.id === action.payload.id
+        );
+        todo!.status = action.payload.status;
+      });
+
     default:
       return state;
   }

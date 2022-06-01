@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { ModalActionEnum, ModalAction, ModalState } from './types';
 
 const initialState: ModalState = {
@@ -11,9 +12,13 @@ export const modalReducer = (
 ): ModalState => {
   switch (action.type) {
     case ModalActionEnum.SET_VISIBLE:
-      return { ...state, isVisible: !state.isVisible };
+      return produce(state, (draftState) => {
+        draftState.isVisible = !draftState.isVisible
+      });
     case ModalActionEnum.SET_TYPE:
-      return { ...state, type: action.payload };
+      return produce(state, (draftState) => {
+        draftState.type = action.payload
+      });
     default:
       return state;
   }
