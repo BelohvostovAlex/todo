@@ -13,6 +13,7 @@ export const useFetchData = (url: string) => {
       try {
         setIsLoading(true);
         const response = await axios.get(url);
+
         setData(response.data);
         setErrorMessage('');
       } catch (error) {
