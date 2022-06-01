@@ -1,7 +1,7 @@
-import { ModalActionCreators } from './modalReducer/action-creators';
-import { TodosActionCreators } from './todosReducer/action-creators';
+import { modalActionCreators } from './modalReducer/action-creators';
+import { todosActionCreators } from './todosReducer/action-creators';
 
 export const allActionCreators = {
-  ...ModalActionCreators,
-  ...TodosActionCreators,
+  ...modalActionCreators,
+  ...todosActionCreators,
 };
